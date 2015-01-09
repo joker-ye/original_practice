@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>事件—基础</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+/*  div{
+    padding: 100px;
+  }*/
+  #div1{
+    width: 200px;height: 200px;background: #f60;position: absolute;
+  }
+  #showBox{
+    background: #f60;
+    width: 200px;
+    height: 200px;
+    display: none;
+  }
+
+  div{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background: #f60;
+  }
+
+  #go{
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+  }
+  </style>
+</head>
+<body id="body">
+
+  
+<!--   <div id="div1">
+    
+  </div> -->
+ 
+  <!-- <div style="background:#ccc;" onclick = "alert(this.style.background)">
+    <div style="background:green;" onclick = "alert(this.style.background)">
+      <div style="background:red;" onclick = "alert(this.style.background)">
+        
+      </div>
+    </div>
+  </div> -->
+
+
+  <!-- <input type="button" value="show" id="show">
+  <div id="showBox">
+    fsjdlfjdsk
+  </div> -->
+
+<div id="go">flsdjkfjdsl</div>
+
+  <!-- <div>111</div>
+  <div>22</div>
+  <div>33</div>
+  <div>44</div>
+  <div>55</div>
+  <div>55</div>
+  <div>55</div>
+  <div>55</div>
+  <div>55</div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+   <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div> -->
+
+
+  <input id="txt1" type="text">
+  <input id="btn1" type="button" value="发布">
+ <textarea id="txt2" rows="10" cols="40">
+   
+ </textarea>
+
+
+  <script src="js/base.js"></script>
+
+  <script src="js/move.js"></script>
+  <script>
+
+
+  window.onload = function(){
+
+    //document代表整个网页
+    // document.onclick = function(ev){
+
+    //   var oEvent = ev || event;
+
+    //   console.log(oEvent.clientX+","+oEvent.clientY);
+
+    // }
+
+    // console.log(document.childNodes[1].tagName);   //html
+
+
+
+    
+    page.init();
+
+
+  }
+
+
+
+  var page = {
+
+
+    init:function(){
+
+
+       // this.ctrlEnter();   //ok
+
+       this.keyboardEvent();   //no
+
+       // this.likeSelect();
+
+        // this.mouseMove();
+
+        // this.followMouse();
+
+    },
+
+    //重点是ctrl+enter 怎么实现
+    ctrlEnter:function(){
+
+
+      var oTxt1 = $("txt1");
+      var oTxt2 = $("txt2");
+      var oBtn = $("btn1");
+
+      oBtn.onclick = function(){
+
+        oTxt2.value+=oTxt1.value;
+
+      }
+
+      oTxt1.onkeydown=function(ev){
+
+        var oEvent = ev||event;        
+
+        //ctrlKey必须把ctrl按下去  shiftKey  altKey
+
+        if(oEvent.keyCode=="13" && oEvent.ctrlKey){
+
+          oTxt2.value+=oTxt1.value+'\n';
+
+          oTxt1.value="";
+
+        }
+
+      }
+
+
+    },
+
+    keyboardEvent:function(){
+
+      document.onkeydown = function(ev){
+
+        var oEvent = ev||event;
+
+        var oGo = $("go");
+
+        if(oEvent.keyCode==37){
+
+          if(oGo.offsetLeft>10){
+
+            oGo.style.left = oGo.offsetLeft -10 +"px";
+
+          }
+
+        }else if(oEvent.keyCode==39){
+
+          oGo.style.left = oGo.offsetLeft +10 +"px";
+
+        }else if(oEvent.keyCode==38){
+
+          oGo.style.top = oGo.offsetTop -10 +"px";
+
+        }else if(oEvent.keyCode==40){
+
+          oGo.style.top = oGo.offsetTop +10 +"px";
+
+        }else if(oEvent.keyCode==13){
+
+          startMove(oGo,{"width":300,"height":300,"opacity":30});
+
+        }
+
+        console.log(oEvent.keyCode);
+
+        // oEvent.preventDefault();  
+
+      }
+
+
+    },
+
+    likeSelect:function(){
+
+      //冒泡事例,简单模拟select
+      var oShowBox = $("showBox");
+
+      $("show").onclick = function(ev){
+
+        var oEvent = ev||event;
+
+        oShowBox.style.display = "block";
+
+        //取消冒泡
+        
+        oEvent.cancelBubble = true;
+
+      }
+
+      document.onclick = function(ev){
+
+        // var oEvent = ev||event;
+
+        oShowBox.style.display = "none";
+
+      }
+
+    },
+
+    //ok 鼠标跟随的大模块
+    mouseMove:function(){
+
+      var oDiv = $("div1");
+
+      oDiv.onmousemove = function(ev){
+
+        var oEvent = ev || event;
+
+         console.log(oEvent.clientX);
+
+      }
+
+
+      document.onmousemove = function(ev){
+
+        //clientX  clientY可视区位置
+
+         var oEvent = ev || event;
+
+         var oPos = getPos(oEvent);
+
+         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+         oDiv.style.left = oPos.x+"px";
+
+         oDiv.style.top = oPos.y+"px";
+
+      }
+
+    },
+
+    //OK
+
+    followMouse:function(){
+
+
+      document.onmousemove = function(ev){
+
+        var aDiv = document.getElementsByTagName("div");
+
+        var oEvent = ev||event;
+
+        var oPos = getPos(oEvent);
+
+        for (var i = aDiv.length-1; i >0 ; i--) {
+
+          aDiv[i].style.left = aDiv[i-1].offsetLeft + "px";
+
+          aDiv[i].style.top = aDiv[i-1].offsetTop + "px";
+
+        };
+
+         aDiv[0].style.left = oPos.x + "px";
+
+         aDiv[0].style.top = oPos.y + "px";
+
+      }
+
+
+    }
+
+
+  }
+  
+
+
+  function getPos(ev){
+
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+    var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+    console.log(ev.clientY+"dfsfdjslk");
+
+    return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop};   //clientX可视化高度
+
+
+    // jq 里面的 e.pageY == ev.clientY+scrollTop
+
+  }
+
+
+  function stopBubble(e) {  
+    //如果提供了事件对象，则这是一个非IE浏览器  
+    if(e && e.stopPropagation) {  
+  　　//因此它支持W3C的stopPropagation()方法  
+  　　e.stopPropagation();   
+    } else {  
+  　　//否则，我们需要使用IE的方式来取消事件冒泡   
+  　　window.event.cancelBubble = true;  
+    }  
+    return false;   
+}  
+
+function stopDefault(e) {
+    //如果提供了事件对象，则这是一个非IE浏览器 
+    if(e && e.preventDefault) {
+    　　//阻止默认浏览器动作(W3C)
+    　　e.preventDefault();
+    } else {
+    　　//IE中阻止函数器默认动作的方式 
+    　　window.event.returnValue = false; 
+    }
+    return false;
+  }
+  
+  </script>
+</body>
+</html>

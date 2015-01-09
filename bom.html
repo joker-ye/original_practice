@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>BOM</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">    
+    *{margin: 0;padding: 0;list-style: none;}
+    span {
+        position: absolute;
+        display: block;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+        height: 200px;
+        background: #f60;
+    }
+
+    </style>
+</head>
+<body id="body" style="height:2000px;">
+    <span id="spanFix"></span>
+
+    <textarea id="txt1">
+
+
+    
+
+    </textarea>
+    <br>
+
+    <input type="button" value="open" id="btn1">  
+
+    <input type="button" value="locationGo" id="btn2">  
+
+    <input type="button" value="viewBlock" id="btn3">  
+
+    <input type="text" value="" id="txt2">  
+
+
+
+   
+
+</body>
+    <script src="js/base.js"></script>
+    <script src="js/move.js"></script>
+    <script>
+
+    window.onload = function(){
+
+        page.init();
+
+    }
+
+    //bom是用来操作浏览器的
+
+
+    var page = {
+
+        init:function(){
+
+            this.openWindow();
+
+            this.showUserAgent();
+
+            this.showLocationInfo();
+
+            this.showView();
+
+            this.soveFiexed();
+
+        },
+
+        openWindow:function(){
+
+            var oBtn1 = $("btn1");
+
+            var oTxt1 = $("txt1");
+
+            oBtn1.onclick = function(){
+
+                var oNewWin = window.open("about:blank","_blank");  //return new window object
+
+                oNewWin.document.write(oTxt1.value);
+
+            }
+
+        },
+
+        showUserAgent:function(){
+
+            console.log(window.navigator.userAgent);
+
+        },
+
+        showLocationInfo:function(){
+
+            var oDiv2 = $("btn2");
+
+            oDiv2.onclick = function(){
+
+                //window.location = "http://www.baidu.com/";
+
+                window.location.href = "http://www.baidu.com/";
+
+            }
+
+            console.log(window.location);
+
+        },
+
+        //js 原生可视区域
+        showView:function(){
+
+            var obtn3 = $("btn3");
+
+            var oTxt2 = $("txt2");
+
+            obtn3.onclick = function(){
+
+                oTxt2.value = document.documentElement.clientWidth+","+document.documentElement.clientHeight;
+
+                //顺便输出当前滚动条的位置好了
+                //ie
+                // console.log(document.documentElement.scrollTop);
+
+                // console.log(document.body.scrollTop);
+
+                //兼容写法
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                console.log(scrollTop);
+
+            }
+
+        },
+
+        //IE6 fixed problem
+
+        soveFiexed:function(){
+
+            var oSpanFix = $("spanFix");
+
+            window.onscroll = window.onresize = function(){
+
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                oSpanFix.style.top = scrollTop+document.documentElement.clientHeight - oSpanFix.offsetHeight+"px";
+
+            }
+
+            // var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            var timer = null;
+
+
+
+            //返回顶部
+            oSpanFix.onclick = function(){
+
+                // var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                clearInterval(timer);
+                // console.log(scrollTop);
+
+                // document.body.scrollTop = 0;
+
+                timer = setInterval(function(){
+
+                    var speed = document.body.scrollTop/10;
+
+                    speed = Math.ceil(speed);
+
+                    console.log(speed);
+
+                     if(document.body.scrollTop==0){
+
+                        clearInterval(timer);
+
+                     }else{
+
+                        document.body.scrollTop -= speed;
+
+                     }    
+
+                },10);
+
+
+
+            }
+
+        }
+
+    }
+    
+
+
+    </script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>尺寸1</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+
+<input type="button" value="gogo" id="gogo" style="margin-top:20px;">
+
+
+<input type="text" id="go">
+
+<script>
+
+  function cancelHandler(ev){
+
+    var oEvent = ev || window.event;  //用于IE
+
+    if(oEvent.preventDefault) oEvent.preventDefault(); //标准技术
+
+    if(oEvent.returnValue) oEvent.returnValue = false; //IE
+
+    return false;
+
+  }
+
+  window.onload = function(){
+
+    var oTxt = document.getElementById("go");
+
+    var oButton = document.getElementById("gogo");
+
+    oTxt.onkeydown = function(ev){
+
+      cancelHandler(ev);
+
+    }
+
+    oButton.onclick = function(ev){
+
+      var oEvent = ev || window.event;
+
+      alert(this.offsetHeight);
+
+    }
+
+  }
+
+</script>
+
+</body>
+</html>

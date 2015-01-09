@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>运动</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    .target_div{
+      position: absolute;
+      left: -450px;
+      width:450px;
+      height: 450px;
+      border:1px solid #f60;
+      background: #333;
+    }
+    .img_box{
+      float: left;
+      margin-left: 50px;
+      margin-top: 50px;
+      padding: 2px;
+      border:1px solid #ddd;
+    }
+    #div1{width: 200px;height: 200px;background: red;filter:alpha(opacity:30);opacity: 0.3;}
+    </style>
+</head>
+<body id="body">
+   
+
+<div class="target_div" id="targetDiv">
+  
+</div>
+
+<div class="clear"></div>
+
+<div id="div1">
+  <img src="img/ind01.jpg" alt="">
+</div>
+
+
+</body>
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+    window.onload = init;
+
+    function init(){
+
+     
+      move();
+
+      
+      opacity();
+      
+
+    }
+
+
+    //运动
+
+    function move(){
+
+       OE.addEvent($("targetDiv"),"mouseover",function(e){
+
+        startMove(0);
+
+       });
+
+       OE.addEvent($("targetDiv"),"mouseout",function(e){
+
+        startMove(-450);
+
+       });
+
+       var timer = null;
+
+       //移动
+       function startMove(iTarget){
+
+          var oDiv = $("targetDiv");
+
+          clearInterval(timer);
+
+          timer = setInterval(function(){
+
+            var speed = 0;
+
+            if(oDiv.offsetLeft > iTarget){
+
+              speed=-10;
+
+            }else{
+
+              speed=10;
+
+            }
+
+
+            if(oDiv.offsetLeft == iTarget){
+
+              clearInterval(timer);
+
+            }else{
+
+              oDiv.style.left = oDiv.offsetLeft+speed+"px";
+
+            }
+
+          },30);
+
+       }
+
+    }
+
+
+    //渐变
+
+    function opacity(){
+
+      OE.addEvent($("div1"),"mouseover",function(e){
+
+        startOpacity(100);
+
+       });
+
+       OE.addEvent($("div1"),"mouseout",function(e){
+
+        startOpacity(30);
+
+       });
+      
+
+       var timer = null,alpha=30;
+       //渐变
+       function startOpacity(iTarget){
+
+          var oDiv = $("div1");
+
+          clearInterval(timer);
+
+          timer = setInterval(function(){
+
+            var speed = 0;
+
+            if(alpha < iTarget){
+
+              speed=10;
+
+            }else{
+
+              speed=-10;
+
+            }
+
+
+            if(alpha == iTarget){
+
+              clearInterval(timer);
+
+            }else{
+
+              alpha+=speed;
+
+              oDiv.style.filter = 'alpha(opacity:'+alpha+')';
+
+              oDiv.style.opacity = alpha/100;
+
+            }
+
+          },30);
+
+       }
+
+    }
+
+
+    </script>
+</html>

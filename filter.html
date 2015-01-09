@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>字符串截取</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css"></head>
+<body id="body">
+
+  <div class="wrapper"></div>
+
+  <div id="go"></div>
+
+  <script src="js/base.js"></script>
+  <script>
+
+  window.onload = function(){
+
+    var a = "$ 58.98";
+
+    console.log(a.match(/\d+\.?\d+/));
+
+    $("go").innerHTML = a.match(/\d+\.?\d+/)[0];
+
+  }
+
+  </script>
+</body>
+</html>

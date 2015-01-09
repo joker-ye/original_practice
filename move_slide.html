@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>原生轮播图</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  
+  .play{
+    width: 500px;
+    height: 300px;
+    position: relative;
+    margin: 100px auto 100px;
+    overflow: hidden;
+  }
+
+  .play_ctrl{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 10;
+  }
+  .play_ctrl li{
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    background: #f60;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+  }
+  .play_ctrl li:hover,
+  .play_ctrl li.active{
+    background: #000;
+  }
+
+  .play_block{
+    position:absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .play_block li{
+    width: 100%;
+    height: 300px;
+  }
+  .play_block li img{
+     width: 100%;
+    height: 100%;
+  }
+  </style>
+</head>
+<body>  
+   
+
+   <div id="play" class="play">
+      
+        <ol class="play_ctrl">
+          <li class="active">1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </ol>
+
+        <ul class="play_block">
+          <li>
+            <a href="#">
+              <img src="img/1.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="img/2.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="img/3.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="img/4.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="img/5.png" alt="">
+            </a>
+          </li>
+        </ul>
+
+   </div>
+
+<script src="js/base.js"></script>
+
+<script src="js/move.js"></script>
+
+<script>
+
+window.onload = function(){
+
+   page.init();  
+
+}
+
+
+var page = {
+
+  init:function(){
+
+    this.slide();
+
+  },
+
+  slide:function(){
+
+    var oDiv = $("play");
+
+    var aLi = oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
+
+    var oUl = oDiv.getElementsByTagName('ul')[0];
+
+    var now = 0;
+
+    var timer = null;
+
+    for (var i = 0; i < aLi.length; i++) {
+
+      aLi[i].index = i;
+
+      aLi[i].onclick = function(){
+
+        now = this.index;
+
+        tab();
+
+      }      
+
+    }
+
+    function tab(){
+
+      for(var i = 0; i < aLi.length; i++){
+
+          aLi[i].className = "";
+
+      }
+
+      aLi[now].className = "active";
+
+      startMove(oUl,{top:-300*now});
+
+    }
+
+
+    function next(){
+
+        now++;
+
+        if(now == aLi.length){
+
+          now =0;
+
+        }
+
+        tab();
+
+    }
+
+    timer = setInterval(next,2000);
+
+
+    oDiv.onmouseover = function(){
+
+      clearInterval(timer);
+
+    }
+
+    oDiv.onmouseout = function(){
+
+      timer = setInterval(next,2000);
+
+    }
+
+
+
+  }
+
+}
+
+</script>
+</body>
+</html>

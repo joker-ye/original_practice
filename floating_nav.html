@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>浮动导航</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    #body{height: 5000px;}
+    #div1{width: 100px;height: 150px;background: red;position: absolute;right: 0 ;bottom: 0;}
+    /*#div2{width: 1px;height: 200px;position: absolute;left: 300px;top: 0;background: #000;}*/
+    </style>
+</head>
+<body id="body">
+  
+
+<div id="div1">
+  
+</div>
+
+<div id="div2"></div>
+
+
+</body>
+    <script src="js/base.js"></script>
+    
+    <script>
+
+    window.onscroll = function(){
+      
+
+      var oDiv = $("div1");
+
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+      // oDiv.style.top = document.documentElement.clientHeight - oDiv.offsetHeight+scrollTop;
+
+      //底部
+       // startMove(document.documentElement.clientHeight - oDiv.offsetHeight+scrollTop);
+
+      //中间
+      startMove(parseInt((document.documentElement.clientHeight - oDiv.offsetHeight)/2+scrollTop)); 
+
+    }
+
+
+    ;(function(){
+
+
+       //定时器
+      var timer = null;
+
+      function startMove(iTarget){
+
+        var oDiv = $("div1");
+
+        clearInterval(timer);
+
+        timer = setInterval(function(){
+
+          var speed = (iTarget-oDiv.offsetTop)/5;
+
+          speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+          if(oDiv.offsetTop == iTarget){
+
+            clearInterval(timer);
+
+          }else{
+
+            oDiv.style.top = oDiv.offsetTop+speed+"px";
+
+            document.title = oDiv.offsetTop;
+
+          }
+
+        },30);
+
+
+    }
+
+    window.startMove = startMove;
+
+    })(window);
+
+   
+   
+
+    </script>
+</html>
+

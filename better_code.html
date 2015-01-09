@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>可维护的代码</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css"></head>
+<body id="body">
+
+  <div class="wrapper"></div>
+
+  <script src="js/base.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+
+    /*
+     * 1
+     */
+     (function(){
+
+        function doSomething() {
+          var result = 10 + value;      
+          var value = 10;
+          return result;
+       }
+
+      var result = doSomething();
+      console.log(result);    //NaN
+
+      function go(){
+        console.log(1);
+      }
+
+      window.go = go();
+
+     })(window);
+
+     go();
+    
+
+    /*
+     * 1
+     */
+     function doSomething1() {
+        var result;
+        var value;
+        result = 10 + value;
+        value = 10;
+        return result;
+     }
+
+     console.log(doSomething1());
+
+     /*
+     * 1
+     */
+
+ /**
+  * The main application object.
+  * @class MyApplication
+  * @static
+  */
+  var MyApplication = {
+
+     /**
+      * Adds two numbers together.
+      * @param {int} num1 The first number.
+      * @param {int} num2 The second number.
+      * @returns {int} The sum of the two numbers.
+      * @method add
+      */
+      add: function (num1, num2) {
+          return num1 + num2;
+      }
+  }
+
+
+  function show(){
+    var data = {"id":1};
+    return data;
+  }
+
+  var data = show();
+
+  alert(data.id);
+
+  </script>
+</body>
+</html>

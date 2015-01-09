@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+<body id="body">
+
+
+</body>
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+      var F = function(){};
+      var p = F.prototype;
+      var c = p.constructor;
+      console.log("constructor的意思："+(c===F));
+
+      var o = new F();
+      o.constructor ===F;//true
+
+
+      //defineClass
+      // function defineClass(constructor,methods,statics){
+      //   if(methods){
+      //     extend(constructor.prototype,methods);
+      //   }
+
+      //   if(statics){
+      //     extend(constructor,statics);
+      //   }
+
+      //   return constructor;
+      // }
+
+      // var simple = defineClass(function(f,t){
+      //   this.f =f;
+      //   this.t = t;
+      // },{
+      //   add:function(x){
+      //     alert(this.f+x);
+      //   }
+      // },{
+      //   stati:function(t){
+      //     return new simple(1,3);
+      //   }
+      // });
+
+
+
+      var Set = (function go(){
+        function Set(){
+          this.n=20;
+        }
+
+        Set.prototype.add = function(x){
+          console.log("go:"+(x+this.n));
+          go();
+        }
+
+        Set.prototype.showN = function(){
+          console.log(this.n);
+        }
+
+        function go(){
+          console.log("show:go");
+        }
+
+        return Set;
+      })();
+
+      var st = new Set();
+      st.add(10);
+      st.showN();
+
+
+      //函数暴路
+      var collections;
+      if(!collections){
+        collections = {};
+      }
+
+      collections.sets = (function namespace(){
+        function go(){
+          console.log("gogogo");
+        }
+        function add(){
+          console.log("add");
+        }
+        return {
+          go:go,
+          add:add
+        }
+      })();
+
+
+      collections.sets.go();
+
+
+//apply call的用法
+
+function CreatePerson(name,age,job){
+        this.name=name;
+        this.age=age;
+        this.job=job;
+        this.run=function(){
+                return this.name+","+this.age+","+this.job;
+        };
+}
+
+var yeling = new CreatePerson("yeling","24","webEnd");
+console.log(yeling);//{name: "yeling", age: "24", job: "web end", run: function}
+console.log(yeling.run());//yeling,24,web end
+
+
+
+
+
+ // 1.组合构造模式+原型模式（需要独立的部分用构造函数，需要共享的部分用原型函数）
+                
+  function creartPer(name,age){
+          this.name=name;
+          this.age=age;
+          this.friends=["叶岭","张三"];
+  }
+  creartPer.prototype={
+          constructor : creartPer,
+          run : function(){
+              alert(this.name);
+          }
+  }
+
+  var person1=new creartPer("lewis",100);
+  person1.run();
+                        
+
+
+
+
+    </script>
+</html>

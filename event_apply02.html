@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>事件—高级应用2</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+  
+
+  #drag{
+    width: 150px;height: 150px;background: #f60;position: absolute;
+  }
+
+  #parent{
+    width: 600px;height: 20px;background: #ccc;position: relative;margin: 100px auto;
+  }
+  #div1{
+    width: 20px;height: 20px;background: red;position: absolute;left: 0;top: 0;
+  }
+  #div2{
+    width: 0px;height: 0px;background: #000;margin-left: 300px;display: inline-block;
+  }
+  #div3{
+    width: 200px;height: 200px;background: #000;margin-left: 50px;filter:alpha(opacity=0);opacity: 0;display: inline-block;
+  }
+
+  #div4{
+    position: relative;width: 400px;height: 300px;border:1px solid #000;overflow: hidden;
+    margin-left: 20px;display: inline-block;
+  }
+
+  #div5{
+    position: absolute;left: 0;top: 0;
+    padding: 10px;
+  }
+
+  </style>
+</head>
+<body id="body">
+
+
+<div id="drag">
+  
+</div>
+
+<div id="parent">
+  <div id="div1">
+    
+  </div>
+</div>
+
+<div id="div2"></div>
+
+<div id="div3"></div>
+
+<div id="div4">
+  
+  <div id="div5">
+    
+ web前端达人
+web前端达人 在学习课程《Javascript 基础视频教程》； 已经学到了第7章的第1小节：24 - Ajax基础。加油！ http://t.cn/zTSxHKB
+ 
+12秒前 来自 课程-Javascript 基础视频教程
+ 优才小秘书
+优才小秘书 在学习课程《iOS视频教程—Objective-C部分》； 已经学到了第2章的第5小节：if语句和for循环语句。加油！ http://t.cn/zTfEJV2
+ 
+7分钟前 来自 课程-iOS视频教程—Objective-C部分
+ web前端达人
+web前端达人 #每日签到#  与其强言欢笑，不如在知识中遨游
+27分钟前
+ 优才小秘书
+优才小秘书 #每日签到#  阳光明媚，每天充实，没有比这更开心的了
+今天00:37
+ 优才小秘书
+优才小秘书 回答了问题 《js怎么设置div ，让div里的下拉变成只读的。》 http://t.cn/RPbjIXk
+今天00:20 来自 问答-js怎么设置div ，让div里的下拉变...
+ 优才小秘书
+优才小秘书 回答了问题 《已经在plist里面设置了屏幕方向了，为什么还要在代码里设置屏幕方向呢》 http://t.cn/RPbx8Jh
+07月24日 19:38 来自 问答-已经在plist里面设置了屏幕方向了，为...
+ 优才小秘书
+优才小秘书 #每日签到#  嘻嘻，我来了，低调哦
+07月24日 16:37
+web前端达人
+web前端达人 在学习课程《Javascript 基础视频教程》； 已经学到了第7章的第1小节：24 - Ajax基础。加油！ http://t.cn/zTSxHKB
+ 
+12秒前 来自 课程-Javascript 基础视频教程
+ 优才小秘书
+优才小秘书 在学习课程《iOS视频教程—Objective-C部分》； 已经学到了第2章的第5小节：if语句和for循环语句。加油！ http://t.cn/zTfEJV2
+ 
+7分钟前 来自 课程-iOS视频教程—Objective-C部分
+ web前端达人
+web前端达人 #每日签到#  与其强言欢笑，不如在知识中遨游
+27分钟前
+ 优才小秘书
+优才小秘书 #每日签到#  阳光明媚，每天充实，没有比这更开心的了
+今天00:37
+ 优才小秘书
+优才小秘书 回答了问题 《js怎么设置div ，让div里的下拉变成只读的。》 http://t.cn/RPbjIXk
+今天00:20 来自 问答-js怎么设置div ，让div里的下拉变...
+ 优才小秘书
+优才小秘书 回答了问题 《已经在plist里面设置了屏幕方向了，为什么还要在代码里设置屏幕方向呢》 http://t.cn/RPbx8Jh
+07月24日 19:38 来自 问答-已经在plist里面设置了屏幕方向了，为...
+ 优才小秘书
+优才小秘书 #每日签到#  嘻嘻，我来了，低调哦
+  </div>
+
+</div>
+
+
+
+
+  <script src="js/base.js"></script>
+
+  <script>
+
+
+  window.onload = function(){
+
+    
+    page.init();
+
+
+  }
+
+
+
+  var page = {
+
+
+    init:function(){
+
+      //拖拽
+      this.drag();
+
+    },
+
+    drag:function(){
+
+
+      var oDrag = $("div1");
+
+      var oDiv2 = $("div2");
+
+      var oDiv3 = $("div3");
+
+      var oDiv4 = $("div4");
+
+      var oDiv5 = $("div5");
+
+      var oParent = $("parent");
+
+      var disX = 0;
+
+
+
+      oDrag.onmousedown=function(ev){
+
+        var oEvent = ev||event;
+
+        //clientX 是鼠标位置距离顶部距离  
+
+        disX = oEvent.clientX - oDrag.offsetLeft;
+
+        
+
+        //创建带虚线框的拖动div
+
+
+        //ie下使用setCapture 事件全部捕获到自己身上
+        if(oDrag.setCapture){
+
+            oDrag.onmousemove = mouseMove;
+
+            oDrag.onmouseup = mouseUp;
+
+            oDrag.setCapture();   //IE下拒绝拖动选中文字问题
+
+            // return false;   //解决了IE firefox chrome 下选择文字问题  IE6-8不支持，则使用事件捕获
+
+        }else{
+
+          document.onmousemove = mouseMove;
+
+          //div 太小，不要把move 和 up 加到div上,这个是非IE的解决方案
+          document.onmouseup = mouseUp;
+
+          return false;   //解决了IE firefox chrome 下选择文字问题  IE6-8不支持，则使用事件捕获
+
+        }
+
+
+        //mouseup
+        function mouseUp(ev){
+
+           this.onmousemove=null;
+
+           this.onmouseup=null;
+
+           if(oDrag.releaseCapture){
+
+            oDrag.releaseCapture();
+
+           } 
+
+        }
+
+        //mouse move
+        function mouseMove(ev){
+
+
+              var oEvent = ev||event;
+
+              var l = oEvent.clientX - disX;
+
+              
+
+              //clientWidth 可是区域的宽度  offsetWidth 包括padding 和边框哦，注意
+              // var l2 = document.documentElement.clientWidth-oDrag.offsetWidth;
+              
+
+              var l2 =oParent.offsetWidth-oDrag.offsetWidth;
+
+             
+
+              //0 改为 50 或者其他，可以制作磁性吸附
+
+              if( l< 0 ){
+
+                l=0;
+                
+              }else if(l>l2){
+
+                //向右，也不能溢出            
+
+                l=l2;
+
+              }
+
+              oDrag.style.left = l+"px";
+
+              var scale = l/l2;
+
+              //在title中输出
+              document.title = scale;
+
+              //改变盒子宽高
+              oDiv2.style.width = 200*scale+"px";
+
+              oDiv2.style.height = 200*scale+"px";
+
+              //改变盒子透明度
+              oDiv3.style.filter = 'alpha(opacity:'+scale*100+')';
+
+              oDiv3.style.opacity = scale;
+
+              //滚动文字
+
+              oDiv5.style.top = -(oDiv5.offsetHeight-oDiv4.offsetHeight)*scale+"px";
+
+
+        }
+
+        
+
+      };
+
+    }
+
+  }
+  
+
+  
+  </script>
+</body>
+</html>

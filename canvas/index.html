@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>canvas</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    body{
+      background: #000;
+      text-align: center;
+    }
+    #c1{
+      margin: 0 auto;
+      background: #fff;
+    }
+    </style>
+</head>
+<body id="body">
+  
+<canvas id="c1" width="500" height="500">
+  <span>此浏览器不支持canvas</span>
+</canvas>
+
+</body>
+
+<script src="../js/base.js"></script>
+    
+    <script>
+
+    window.onload = function(){
+
+      var oC1 = $("c1");
+
+      var oGC = oC1.getContext("2d");  //目前支持2d场景
+
+      oGC.fillStyle="red";   //设置填充颜色
+
+      oGC.fillRect(50,50,100,100);  //left top width height  绘制矩形
+
+      // oGC.strokeRect(50,50,100,100);
+
+
+
+    }
+    
+    </script>
+
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TemplateJS - 调用模板演示</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<style type="text/css">
+#doc{
+	width: 1200px;
+	margin: 0 auto;
+}
+#header{
+	height: 150px;
+	border: 1px solid #ddd;
+}
+#footer{
+	text-align: center;
+}
+#main{
+	margin: 20px 0;
+	border: 1px solid #ddd;
+	padding: 20px;
+}
+#main h3{
+	margin: 10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div id="doc">loading..</div>
+
+<!-- <script src="./tpl/build/template.js"></script> -->
+
+<script src="js/sea.js"></script>
+
+<!-- <script src="js/require.js"></script> -->
+
+<script>
+// 演示JSON数据
+var data = {
+	title: 'www.feiniu.com,数据处理demo',
+	time: (new Date).toString(),
+	list: [
+		{
+			title: '飞牛网飞牛网飞牛网飞牛网01',
+			url: 'http://www.feiniu.com'
+		},
+		{
+			title: '飞牛网飞牛网飞牛网飞牛网02',
+			url: 'http://www.feiniu.com'
+		},
+		{
+			title: '飞牛网飞牛网飞牛网飞牛网03',
+			url: 'http://www.feiniu.com'
+		},
+		{
+			title: '飞牛网飞牛网飞牛网飞牛网04',
+			url: 'http://www.feiniu.com'
+		},
+		{
+			title: '飞牛网飞牛网飞牛网飞牛网05',
+			url: 'http://www.feiniu.com'
+		}
+	]
+};
+
+
+seajs.config({
+
+    alias: {
+
+      'jquery': './js/jquery/jquery-1.10.2.min'
+
+    }
+
+});
+
+//111111111.普通模式
+// 加载index模板
+// document.getElementById('doc').innerHTML = template('index', data);
+
+
+//2222 seajs 模式
+// 加载index模板
+seajs.use(['./tpl/build/template'], function (template) {
+
+	document.getElementById('doc').innerHTML = template('index', data);
+
+});
+
+//3333 reuqirejs 模式
+// require(['./tpl/build/template'], function (template) {
+// 	document.getElementById('doc').innerHTML = template('index', data);
+// });
+
+
+
+
+</script>
+</body>
+</html>
+
+
+

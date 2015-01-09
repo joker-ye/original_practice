@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>drag 继承事例</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">
+    body{
+        height: 2000px;
+    }
+    #div1{
+        width: 200px;
+        height: 200px;
+        background: #f60;
+        position: absolute;
+    }
+
+    #div2{
+        top: 500px;
+        width: 200px;
+        height: 200px;
+        background: green;
+        position: absolute;
+        left:210px;
+    }
+    </style>
+</head>
+<body id="body">
+
+<div id="div1">
+    普通拖拽
+</div>
+
+<div id="div2">
+    限制范围
+</div>
+
+
+</body>
+
+    <script src="js/base.js"></script>
+
+    <script src="js/objectDrag.js"></script>
+
+    <script src="js/limitDrag.js"></script>
+
+    <script>
+
+    window.onload = function(){
+
+        new Drag("div1");
+
+        new LimitDrag("div2");
+
+    };
+
+
+
+
+    </script>
+</html>

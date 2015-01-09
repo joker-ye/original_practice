@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>dom02</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <style type="text/css">
+
+  </style>
+</head>
+<body id="body">
+
+<div id="wrapper">
+
+
+<div id="go">gogo</div>
+</div>
+
+<input type="text" id="text">
+
+<input type="button" value="insertBefore" id="insertBe">
+
+
+<ul id="ull"></ul>
+  
+
+  <script src="js/base.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+
+  window.onload = function(){
+
+    
+    var oUl = $("ull");
+
+    var oFrag = document.createDocumentFragment(); //实际上基本没用了，是提高DOM性能的东西，被淘汰了
+
+    for (var i =0; i< 10; i++) {
+
+      var oLi  = document.createElement("li");
+
+      oLi.innerHTML = "go";
+
+      oFrag.appendChild(oLi);
+
+     }
+
+     oUl.appendChild(oFrag);
+   
+
+
+    //parentNode.appendChild 子节点
+
+   // $("wrapper").appendChild(div);
+
+   $("insertBe").onclick = function(){
+
+    var div = createDiv();
+
+       $("wrapper").insertBefore(div,$("go"));     
+
+   }
+
+   
+
+  }
+
+  //create dom-div
+
+  function createDiv(){
+
+    var oDiv = document.createElement("div");
+
+    oDiv.className = "gogo";
+
+    oDiv.innerHTML = $("text").value;;
+
+    return oDiv;
+
+  }
+  
+  
+  
+  </script>
+</body>
+</html>

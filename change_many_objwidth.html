@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>多物体运动框架</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    .change_box{
+      width: 120px;
+      height: 50px;
+      margin: 100px;
+      background: #f60;
+      border:10px solid #000;
+    }
+    </style>
+</head>
+<body id="body">
+
+<div id="div1" class="change_box"></div>
+
+<div id="div2" class="change_box"></div>
+
+<div id="div3" class="change_box"></div>
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script>
+
+    var timer = null;
+
+
+    //获取当前样式.offsetWidth offsetHeight 有风险
+    function getStyle(obj,name){
+
+      if(obj.currentStyle){
+
+        return obj.currentStyle[name];
+
+      }else{
+
+        return getComputedStyle(obj,false)[name];
+
+      }
+
+    }
+
+    //运动函数
+    function startMove(obj,iTarget){
+
+      clearInterval(obj.timer);
+
+      var changeWidth = function(){
+
+        var cur = parseInt(getStyle(obj,"width"));
+
+        var speed = (iTarget-cur)/6;
+
+        //ceil 向上取整   floor 向下取整  abs 绝对值  round 四舍五入
+
+        speed = speed >0 ?Math.ceil(speed):Math.floor(speed);
+
+        if(cur==iTarget){
+
+          clearInterval(obj.timer);
+
+        }else{
+
+          obj.style.width = cur + speed +"px";
+
+        }
+
+      }
+
+      obj.timer = setInterval(changeWidth,30);
+
+    }
+
+
+    var oChangeBox = OD.getElementsByClassName("change_box");
+
+    for (var i = 0; i < oChangeBox.length; i++) {
+
+      oChangeBox[i].timer = null;
+
+      oChangeBox[i].onmouseover = function(){
+
+        startMove(this,500);
+
+      }
+
+      oChangeBox[i].onmouseout = function(){
+
+        startMove(this,120);
+        
+      }
+
+    };
+
+    </script>
+</html>

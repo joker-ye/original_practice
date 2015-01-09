@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+  </head>
+  <body id="body">
+    <input type="button" id="btnText" value="text01">
+    <div id="wrap" style="position:relative;">
+      fsdfldsjfkljsdklj
+      <p id="z" style="position:absolute;border:1px solid #ddd;background:#f60;width:100px;height:100px;top:10px;left:10px;"></p>
+      <div id="go">
+        叶灵是个IE超人
+      </div>
+      fsfsfdsfsd
+      <div class="go" id="next"></div>
+      fsdjfsdfsd
+      <div class="go"></div>
+      <div class="go"></div>
+      <div class="go"></div>
+      <div class="woyao   woyaochi" id="woyao" data-action="fyyyyyy">fsdddddddddddddddddddddddddddddddddddddddddd</div>
+    </div>
+    <div id="text"></div>
+    <input type="text" value="gogogogo" id="textInput">
+    <input type="button" id="showValue" value="showValue">
+    <div class="tab">
+        <li class="J_tab_menu">1</li>
+        <li class="J_tab_menu">2</li>
+        <li class="J_tab_menu">3</li>
+      </ul>
+      <div class="tab-contentwrapper">
+        <div class="J_tab_content">content01<div>423423423423</div></div>
+        <div class="J_tab_content" style="display:none;">content02</div>
+        <div class="J_tab_content" style="display:none;">content03</div>
+      </div>
+    </div>
+    <div id="textAfter">insertAfter测试</div>
+    <form id="ddddd">
+      <input type="text" placeholder = 'go' id="inputGo" />
+      <input type="text" placeholder = '132132132' />
+    </form>
+    <p style="padding:500px 0;"></p>
+    <input type="button" id="scroll" value="getSCROLL">
+    <p class="scroll_box"></p>
+    <div id="replace" data-option = "woyaochifan">woyaochifanwoyaochifangg</div>
+    <table>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+  <script src="js/base.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+  window.onload = init;
+  function init(){
+  // OD.insertAt($("wrap"),$("textAfter"),0);
+  console.log(OD.sibling($("woyao"),2));
+  // console.log(OD.child($('wrap'),0).id);
+  //$("woyao").parentNode.removeChild($("woyao"));
+  //OU.stripeTables();
+  YL.Utils.moveElement("z",600,90,30);
+  //alert(OD.parent($("woyao"),2).getAttribute("id"));
+  // console.log($("replace").getAttribute("data-option").length);
+  // console.log(OU.cutstr($("replace").getAttribute("data-option"),4));
+  // console.log(OU.strTrim($("replace").getAttribute("data-option")));
+  // console.log(OU.strReplace($("replace").getAttribute("data-option"),"yao","bu"));
+  //alert(OU.getViewportSize().w);
+  //alert(OU.getInnerText($("go")).length);
+  OU.initDragDom($("z"));
+  //console.log(OU.getWindowHeight());
+  //console.log(OU.getPageScrollHeight());
+  //console.log(OU.getPageScrollWidth());
+  // var countBodyChildren=function(){
+  //   var body_elem = $tag("body")[0].childNodes;
+  //   //alert(body_elem.length);
+  // }();
+  var  createImgBox=function(){
+  var div = document.createElement("div");
+  div.setAttribute("style","border:1px solid red;width:200px;height:200px;margin-left:50px;");
+  $tag("body")[0].appendChild(div);
+  }();
+  // var str = "今天是星期"+"日一二三四五六".charAt(new Date().getDay());
+  // console.log(str);
+  //$("go").setAttribute("style","woyaochifan");
+  //alert($("go").getAttribute("data-action"));
+  //console.log(OD.hasClass($("woyao"),"woyaochi"));
+  //alert(YL.Utils.getViewportSize().h);
+  // YL.Event.on("scroll","click",function(){
+  //   var y = YL.Utils.getScrollOffsets().y;
+  //   YL.Dom.getElementsByClassName("scroll_box")[0].innerHTML = y;
+  // });
+  // alert(document.forms[0].id);
+  // alert(document.getElementsByTagName("form")[0].id);
+  //placeholer
+  // YL.Utils.prepareForm();
+  // console.log(YL.Dom.textContent($("go")));
+  // console.log($("go").textContent);
+  //console.log($("go").innerHTML);
+  //console.log($("go").firstChild.nodeValue);
+  //console.log($("wrap").nextElementSibling.id);//只管节点
+  //console.log($("wrap").nextSibling.id);//no
+  // console.log($("next").parentNode.id);
+  // console.log(YL.Dom.getElementsByClassName("go")[0].parentNode.id);
+  // console.log(YL.Dom.get("go").firstChild.nodeValue);
+  // if($("go").firstChild.nodeType==3){
+  //   //这个取值都受到 html结构的影响
+  //   console.log($("go").firstChild.nodeValue.length);
+  //   console.log($("go").innerHTML);
+  // }
+  // console.log($("go").nextSibling.nodeValue);
+  // console.log($("wrap").children.length);//6
+  // console.log($("wrap").lastElementChild.id);
+  //console.log($("go").);
+  //console.log(YL.Dom.getElements("wrap","text").wrap.id);
+  //$("wrap").setAttribute("data-pid",20);
+  //alert($("wrap").firstChild.nodeValue.length);
+  //查找下一个元素节点
+  //alert(YL.Dom.getNextNode($("next")).className);
+  // YL.Event.on(btnText,"click",function(){
+  //      alert(YL.Dom.getElementsByClassName("go").length);
+  //  });
+  //删除指定元素的classname
+  //YL.Dom.delClass(YL.Dom.get("woyao"),"woyao");
+  //
+  //YL.Dom.get("wrap").getElementsByClassName("go")[0]
+  //YL.Dom.addClass(YL.Dom.get("wrap").getElementsByClassName("go")[0],"add");
+  //alert(YL.Dom.getNextNode("wrap").id);
+  OE.addEvent($("showValue"),"click",function(e){
+    var date = new Date().getDay();
+    alert(date);
+  //alert(this.nodeName);
+  //参数长度
+  //alert(arguments.length);
+  //var node = YL.Event.getEventTarget(e);
+  //alert(node.tagName+","+this.nodeName);
+  });
+  //var tabs = YL.Dom.getElementsByClassName("tab");
+  //new YL.Utils.Tab({root:tabs[0],"trigger":"mouseover","autoplay":true});
+  }
+  </script>
+</html>

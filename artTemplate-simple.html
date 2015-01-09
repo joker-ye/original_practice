@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>artTemplate-simple-demo</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    .desc{
+      display: block;
+      margin: 10px 0;
+    }
+    </style>
+</head>
+<body id="body">
+
+<!-- main -->
+<div id="main">
+     
+</div>
+<!-- end main -->
+
+<!-- main tpl -->
+<script id="demoListDom" type="text/html">
+
+<h1>
+    {{title}}{{$definedfunc("ggo")}}
+    
+    <span>时间：{{time}}</span>
+</h1>
+
+{{each person as value index}}
+
+    <li>条目内容 {{index+1}} ：{{value}}</li>
+
+{{/each}}
+
+<span class="desc">-------------下面是简写each-------------</span>
+
+{{each person}}
+  
+  {{if isAdmin==1 }}
+
+     <li>条目内容 {{$index+1}} ：{{$value}}+++++++{{include 'childTpl'}}</li>
+
+  {{else if isAdmin == 2}}
+
+      <li>2</li>
+
+  {{else}}
+
+      <li>other</li>
+
+  {{/if}}   
+
+{{/each}}
+
+</script>
+<!--end main tpl -->
+
+<!-- main child tpl -->
+<script type="text/html" id="childTpl">
+    ff
+  {{title}}
+
+</script>
+<!--end  main child tpl -->
+
+
+<script src="js/jquery/jquery-1.10.2.min.js"></script>
+
+<script src="js/lib/template.js"></script>
+
+<script type="text/javascript">
+  
+$(function(){
+
+  var data = {
+
+    "isAdmin":1,
+
+    "time":new Date().getTime(),
+
+    "title":"lewis's demo!",
+
+    "person":["戴童鞋","程童鞋","叶童鞋","张三","张三","张三","张三"]
+
+  };
+
+  var new_list = {"go":["11","22","33"]};
+
+  renderData("demoListDom","main",data);
+
+});
+
+template.helper('dateFormat', function (date, format) {
+
+    
+});
+
+
+/**!
+ * author Lewis.ye
+ * @params domid    :当前存模版的script标签ID
+ * @params container:需要填充到容器的ID
+ * @params data     :json对象
+ * @params type     :类型特别指定为1时，填充容器的标识为class 非id
+ * date 2014-07-17
+**/
+
+function renderData(domid,container,data,type){
+
+  var html = template(domid, data);
+
+  if(type==1){
+
+      $("."+container).append(html);
+
+  }else{
+
+      $("#"+container).html(html);
+
+  }
+        
+}
+
+/**!
+ * author Lewis.ye
+ * @description artTemplate 帮助函数
+ * date 2014-07-17
+**/
+template.helper('$definedfunc', function (content) {
+    // 处理字符串...
+
+    return content+"111";
+
+});
+
+</script>
+
+</body>
+</html>

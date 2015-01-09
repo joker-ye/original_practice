@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>dom-apply01</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    </style>
+</head>
+
+<body id="body">
+
+    <div class="wrapper">
+
+        <div class="go">
+
+            <table id="table">
+                <thead id="thead">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </thead>
+                <tbody id="tbody">
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot id="tfoot"></tfoot>
+            </table>
+
+        </div>
+
+
+    </div>
+
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+    window.onload = function() {
+
+        var oTable = $("table");
+
+        var oBody = oTable.tBodies[0];
+
+        console.log(oBody.rows.length); //3   rows - 行 tr
+
+        console.log(oBody.rows[1].cells.length); //4  cells - 单元格 td
+
+        console.log(oBody.id); //tbody
+
+        console.log(oTable.tHead.getAttribute("id")); //tHead 是单体
+        console.log(oTable.tFoot.id); //tFoot 是单体
+
+        
+
+        var oldcolor="";
+
+        for (var i = 0; i < oBody.rows.length; i++) {
+
+          oBody.rows[i].onmouseover = function(){
+
+            oldcolor = this.style.background;
+
+            this.style.background = "#f60";
+
+          }
+
+          oBody.rows[i].onmouseout = function(){
+
+            this.style.background = oldcolor;
+            
+          }
+
+
+
+          if(i%2){
+
+            oBody.rows[i].style.background = "#000";
+
+
+          }else{
+
+            oBody.rows[i].style.background = "";
+
+          }
+
+
+        };
+
+    }
+    </script>
+</body>
+
+</html>

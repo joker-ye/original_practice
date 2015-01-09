@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>:before and :after</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    p.box{
+      width: 300px;
+  border: solid 1px white;
+  padding: 20px;
+    }
+    p.box:before {
+  content: "#";
+  border: solid 1px white;
+  padding: 2px;
+  margin: 0 10px 0 0;
+}
+
+p.box:after{
+
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: #f60;
+  padding: 2px;
+  display: inline-block;
+  *display: inline;
+  *zoom:1;
+
+}
+
+    </style>
+</head>
+<body id="body">
+   
+
+  <div class="wrapper">
+    
+    <p class="box">Other content.</p>
+
+  </div>
+
+
+
+    <script src="js/jquery/jquery-1.10.2.min.js"></script>
+    <script>
+
+
+    $(function(){
+
+      console.log(Math.round(0.065*100));
+
+    });
+
+    (function($){
+
+  var patterns = {
+    text: /^['"]?(.+?)["']?$/,
+    url: /^url\(["']?(.+?)['"]?\)$/
+  };
+
+  function clean(content) {
+    if(content && content.length) {
+      var text = content.match(patterns.text)[1],
+        url = text.match(patterns.url);
+      return url ? '<img src="' + url[1] + '" />': text;
+    }
+  }
+
+  function inject(prop, elem, content) {
+    if(prop != 'after') prop = 'before';
+    if(content = clean(elem.currentStyle[prop])) {
+      $(elem)[prop == 'before' ? 'prepend' : 'append'](
+        $(document.createElement('span')).addClass(prop).html(content)
+      );
+    }
+  }
+
+  $.pseudo = function(elem) {
+    inject('before', elem);
+    inject('after', elem);
+    elem.runtimeStyle.behavior = null;
+  };
+  
+  if(document.createStyleSheet) {
+    var o = document.createStyleSheet(null, 0);
+    o.addRule('.dummy','display: static;');
+    o.cssText = 'html, head, head *, body, *.before, *.after, *.before *, *.after * { behavior: none; } * { behavior: expression($.pseudo(this)); }';
+  }
+
+})(jQuery);
+
+    </script>
+    </body>
+</html>

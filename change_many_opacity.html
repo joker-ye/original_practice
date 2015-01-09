@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>多物体透明度</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    div{
+      width: 200px;
+      height: 200px;
+      margin: 20px;
+      float: left;
+      background: red;
+      filter:alpha(opacity:30);
+      opacity: 0.3;
+    }
+    </style>
+</head>
+<body id="body">
+
+<div class="c1" id="div1">变宽</div>
+<div class="c2" id="div2">变高</div>
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script>
+
+    window.onload = function(){
+
+      var aDiv = document.getElementsByTagName("div");
+
+      for (var i = 0; i < aDiv.length; i++) {
+
+         aDiv[i].timer = null;
+
+         aDiv[i].alpha = 30;
+
+        aDiv[i].onmouseover = function(){
+
+          startMove(this,100);
+
+        };
+
+        aDiv[i].onmouseout = function(){
+
+          startMove(this,30);
+          
+        }
+
+      }
+
+    };
+
+  
+
+    function startMove(obj,iTarget){
+
+      clearInterval(obj.timer);
+
+      obj.timer = setInterval(function(){
+
+        var speed = (iTarget-obj.alpha)/6;
+
+        //Math.ceil向上取整   Math.floor向下取整
+
+        speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+
+        if(obj.alpha==iTarget){
+
+          clearInterval(obj.timer);
+
+        }else{
+
+          obj.alpha+=speed;
+
+          obj.style.filter = 'alpha(opacity:'+obj.alpha+')';
+
+          obj.style.opacity = obj.alpha/100;
+
+        }
+
+      },30);
+
+    }
+
+    
+
+    </script>
+</html>

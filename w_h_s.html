@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>浮动导航</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    #body {
+        height: 5000px;
+    }
+    #div1 {
+        width: 100px;
+        height: 150px;
+        background: red;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    /*#div2{width: 1px;height: 200px;position: absolute;left: 300px;top: 0;background: #000;}*/
+    </style>
+</head>
+
+<body id="body">
+
+
+
+
+</body>
+
+<script src="js/jquery/jquery-1.10.2.min.js"></script>
+
+
+<script>
+
+window.onload = function(){
+
+
+  alert('可视化区域宽度'+getClientHeight());
+
+}
+
+
+
+/********************
+ * 取窗口可视范围的高度
+ *******************/
+function getClientHeight() {
+    var clientHeight = 0;
+    if (document.body.clientHeight && document.documentElement.clientHeight) {
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+    } else {
+        var clientHeight = (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+    }
+    return clientHeight;
+}
+
+/********************
+ * 取文档内容实际高度
+ *******************/
+function getScrollHeight() {
+    return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+}
+</script>
+
+
+</html>

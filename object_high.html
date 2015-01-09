@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>面向对象-高级</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">
+    #div1 input{
+        width: 100px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    #div1 input.active{
+        background: #f60;
+    }
+
+    #div1 div{
+        display: none;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        width: 500px;
+    }
+    </style>
+</head>
+<body id="body">
+
+
+
+
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script>
+
+    window.onload = function(){
+
+        var obj = new B();
+
+        console.log(obj.abc);
+
+        console.log(obj.show());
+
+        //B 的原型上的方法，A不应该有的,报错才说明是对的。
+        var oA = new A();
+
+        oA.fun();
+
+    }
+
+
+    //说说继承
+    function A(){
+
+        this.abc = 12;
+
+    }
+
+    A.prototype.show = function(){
+
+      return "show's function";
+
+    }
+
+    //继承A
+    function B(){
+
+        //this 本来是 new B(), 但这个地方this 和 A 里的this相同
+        A.call(this);
+
+    }
+
+    // B.prototype = A.prototype;    //引用，此处不能使用引用，因为继承不能影响到父类
+
+    for (var i in A.prototype) {
+        
+        B.prototype[i] = A.prototype[i];
+
+    }
+
+    B.prototype.fun = function(){
+
+        console.log("这应该是B的方法");
+
+    }
+
+    //-----------------------------------------引用----------------------//
+
+    ;(function(){
+
+        var arr1 = [1,2,3];
+
+        var arr2 = arr1;  //系统只是把  arr2 也指向arr1占用的空间而已，并没有另外复制一个数组
+
+        arr2.push(4);
+
+        alert(arr2);
+
+    })(window);
+
+    
+
+    //-----------------------------------------引用----------------------//
+
+
+
+    //-----------------------------------------call----------------------//
+    //call是什么东西
+    function showThis(a,b){
+
+        alert(this);
+
+        console.log(a+","+b);
+
+    }
+
+    // showThis(10,20);  //this 指向window   全：show.call();
+
+    // showThis.call("isthis",10,20);  //this 指向12  call是用参数的，可以改变this指向
+
+    //-----------------------------------------call---------------------- //
+
+
+    //-----------------------------------------json对象方式---------------------- //
+
+    //用json实现对象 --  单体对象，整个程序只会有一个
+    //面向对象
+    //Json 适合：整个程序只会有一个 ，写起来简单，不能实现多个对象，如果用，又回到工厂模式了。
+
+    // var json = {
+
+    //     name:'blue',
+
+    //     qq:'329388589',
+
+    //     showName:function(){
+
+    //         console.log("my name is: "+this.name);
+
+    //     },
+
+    //     showQq:function(){
+
+    //         console.log("my qq is"+this.qq);
+
+    //     }
+
+
+    // }
+
+    //-----------------------------------------json对象方式---------------------------//
+
+
+    //-----------------------------------------命名空间 start---------------------- //
+
+
+    // //命名空间
+    // var zns = {};
+
+    // zns.common = {};
+
+    // zns.fx = {};
+
+    // zns.site = {};
+
+    // zns.common.getUser = function(){
+
+
+
+    // }
+
+    // zns.fx.getUser = function(){
+
+        
+
+    // }
+
+    // zns.site.getUser = function(){
+
+        
+
+    // }
+
+
+    //-----------------------------------------命名空间 end---------------------- //
+    
+    </script>
+</html>

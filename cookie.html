@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>cookie</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    #div1{
+      width:100px;
+      height: 100px;
+      background: #f60;
+      position: absolute;
+    }
+    </style>
+</head>
+<body>
+
+<div id="div1"></div>
+fdsfsdfsfsd
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+    window.onload = function(){
+
+      page.init();
+
+      OU.initDragDom("div1");
+      
+    };
+
+
+
+    var page = {
+
+      init:function(){
+
+        this.addCookie();
+
+        this.useCommonJs();
+
+      },
+
+      addCookie:function(){
+
+        //set cookie timeout
+
+        var oDate = new Date();
+
+        oDate.setDate(oDate.getDate()+14);
+
+        document.cookie = "user=lewis;expires="+oDate;
+
+        // document.cookie = "password=123456";
+
+        console.log(document.cookie);
+
+      },
+
+      useCommonJs:function(){
+
+        OU.setCookie("wocao","1111",24*60*14);  // 分钟作为单位
+
+        // alert(OU.getCookie("wocao"));
+
+      }
+
+    }
+
+
+    </script>
+</html>

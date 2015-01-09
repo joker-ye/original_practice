@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>事件—高级应用1</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+  #div1{
+    position: absolute;width: 200px;background: #ccc;border:1px solid #000;display: none;
+  }
+
+  </style>
+</head>
+<body id="body">
+
+<div id="div1">
+  
+</div>
+
+
+<input type="button" value="按钮" id="btn1">
+
+  <script src="js/base.js"></script>
+
+  <script>
+
+
+  window.onload = function(){
+
+
+    page.init();
+
+
+  }
+
+
+
+  var page = {
+
+
+    init:function(){
+
+      this.bindEvent();
+
+    },
+
+    bindEvent:function(){
+
+      var oBtn = $("btn1");
+
+      // oBtn.onclick = function(){
+
+      //   alert(1);
+
+      // }
+
+      OE.addEvent(oBtn,"click",function(){
+
+        alert(1);
+
+      });
+
+      OE.addEvent(oBtn,"click",function(){
+
+        alert(2);
+        
+      });
+
+
+    }
+
+
+
+
+  }
+  
+  </script>
+</body>
+</html>

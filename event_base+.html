@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>事件—中级</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+  #div1{
+    position: absolute;width: 200px;background: #ccc;border:1px solid #000;display: none;
+  }
+
+  #drag{
+    width: 150px;height: 150px;background: #f60;position: absolute;
+  }
+  </style>
+</head>
+<body id="body">
+
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+  fsafjlsajflsdjalk;fjsddddddddddddddd<br>
+
+
+<div id="div1">
+  <ul>
+    <li>aaaaa</li>
+    <li>vvvvv</li>
+    <li>bbbbb</li>
+    <li>ddddd</li>
+    <li>ccccc</li>
+  </ul>
+</div>
+
+
+<input type="text" id="txt1">
+
+
+<div id="drag">
+  
+</div>
+
+  <script src="js/base.js"></script>
+
+  <script>
+
+
+  window.onload = function(){
+
+    var odiv = document.createElement("div");
+    odiv.style.background = "red";
+    odiv.style.width = "100px";
+    odiv.style.height="100px";
+    odiv.style.marginLeft = "400px";
+
+    document.getElementsByTagName("body")[0].appendChild(odiv);
+
+
+    
+    page.init();
+
+
+  }
+
+
+
+  var page = {
+
+
+    init:function(){
+
+      //必须输入数字
+      // this.mustNum();
+
+
+      //右键菜单
+      // this.rightMenu();
+
+
+      //拖拽
+      this.drag();
+
+    },
+
+     drag:function(){
+
+
+      var oDrag = $("drag");
+
+      var disX = 0;
+
+      var disY = 0;
+
+      oDrag.onmousedown=function(ev){
+
+        var oEvent = ev||event;
+
+        //clientX 是鼠标位置距离顶部距离   可视化距离
+
+        disX = oEvent.clientX - oDrag.offsetLeft;
+
+        disY = oEvent.clientY - oDrag.offsetTop;
+
+        //创建带虚线框的拖动div
+
+        var oBox = document.createElement("div");
+
+        oBox.className="box";
+
+        oBox.style.width = oDrag.offsetWidth-4+"px";
+
+        oBox.style.height = oDrag.offsetHeight-4+"px";
+
+        oBox.style.left = oDrag.offsetLeft+"px";
+
+        oBox.style.top = oDrag.offsetTop+"px";
+
+        oBox.style.borderWidth = "2px";
+
+        oBox.style.borderStyle = "dashed";
+
+        oBox.style.borderColor = "red";
+
+        oBox.style.position = "absolute";
+
+        document.body.appendChild(oBox);
+
+
+        //ie下使用setCapture 事件全部捕获到自己身上
+        if(oDrag.setCapture){
+
+            oDrag.onmousemove = mouseMove;
+
+            oDrag.onmouseup = mouseUp;
+
+            oDrag.setCapture();   //IE下拒绝拖动选中文字问题
+
+            // return false;   //解决了IE firefox chrome 下选择文字问题  IE6-8不支持，则使用事件捕获
+
+        }else{
+
+          document.onmousemove = mouseMove;
+
+          //div 太小，不要把move 和 up 加到div上,这个是非IE的解决方案
+          document.onmouseup = mouseUp;
+
+          return false;   //解决了IE firefox chrome 下选择文字问题  IE6-8不支持，则使用事件捕获
+
+        }
+
+
+        //mouseup
+        function mouseUp(ev){
+
+           this.onmousemove=null;
+
+           this.onmouseup=null;
+
+           if(oDrag.releaseCapture){
+
+            oDrag.releaseCapture();
+
+           } 
+
+
+           oDrag.style.left = oBox.offsetLeft+"px";
+
+           oDrag.style.top = oBox.offsetTop+"px";
+
+           oBox.parentNode.removeChild(oBox);
+
+        }
+
+        //mouse move
+        function mouseMove(ev){
+
+
+              var oEvent = ev||event;
+
+              var l = oEvent.clientX - disX;
+
+              var t = oEvent.clientY - disY;
+
+              //clientWidth 可是区域的宽度  offsetWidth 包括padding 和边框哦，注意
+              var l2 = document.documentElement.clientWidth-oDrag.offsetWidth;
+
+              var t2 = document.documentElement.clientHeight-oDrag.offsetHeight;
+
+              //0 改为 50 或者其他，可以制作磁性吸附
+
+              if( l< 50 ){
+
+                l=0;
+                
+              }else if(l>l2){
+
+                //向右，也不能溢出            
+
+                l=l2;
+
+              }
+
+              if( t< 0 ){
+
+                t=0;
+                
+              }else if(t>t2){
+
+                //向下，也不能溢出            
+
+                t = t2;
+
+              }
+
+              oBox.style.left = l+"px";
+
+              oBox.style.top = t+"px";
+
+            
+
+        }
+
+        
+
+      };
+
+    },
+
+    mustNum:function(){
+
+      var oTxt = $("txt1");
+
+      oTxt.onkeydown = function(ev){
+
+        var oEvent =ev||event;
+
+        //如果用户按 的不是退格，也不是数字
+
+        if(oEvent.keyCode!=37 && oEvent.keyCode!=39 && oEvent.keyCode!=8 && (oEvent.keyCode<48 || oEvent.keyCode >57) ){
+
+          return false;
+
+        }
+
+        console.log(oEvent.keyCode);
+
+
+
+        // return false;  也可以阻止输入
+
+      }
+      
+    },
+
+    rightMenu:function(){
+
+      var oDiv = $("div1");
+
+      document.oncontextmenu = function(ev){
+
+        var oEvent = ev||event;
+
+        oDiv.style.display = "block";
+
+        oDiv.style.left = oEvent.clientX+"px";
+
+        oDiv.style.top = oEvent.clientY+"px";
+
+         return false;  //阻止默认实践
+
+      }
+
+      document.onclick = function(){
+
+        oDiv.style.display = "none";
+
+      }
+
+
+    }
+
+
+  }
+  
+
+
+  function getPos(ev){
+
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+    var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+    return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop};
+
+  }
+
+
+  function stopBubble(e) {  
+    //如果提供了事件对象，则这是一个非IE浏览器  
+    if(e && e.stopPropagation) {  
+  　　//因此它支持W3C的stopPropagation()方法  
+  　　e.stopPropagation();   
+    } else {  
+  　　//否则，我们需要使用IE的方式来取消事件冒泡   
+  　　window.event.cancelBubble = true;  
+    }  
+    return false;   
+}  
+
+function stopDefault(e) {
+    //如果提供了事件对象，则这是一个非IE浏览器 
+    if(e && e.preventDefault) {
+    　　//阻止默认浏览器动作(W3C)
+    　　e.preventDefault();
+    } else {
+    　　//IE中阻止函数器默认动作的方式 
+    　　window.event.returnValue = false; 
+    }
+    return false;
+  }
+  
+  </script>
+</body>
+</html>

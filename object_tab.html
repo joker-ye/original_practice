@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>面向对象-选项卡</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">
+    #div1 input{
+        width: 100px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    #div1 input.active{
+        background: #f60;
+    }
+
+    #div1 div{
+        display: none;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        width: 500px;
+    }
+    </style>
+</head>
+<body id="body">
+
+
+<div id="div1">
+    
+<input type="button" value="aaa" class="active">
+
+<input type="button" value="bbb">
+
+<input type="button" value="ccc">
+
+<div style="display:block;">
+    aaaaaContent
+</div> 
+
+<div>
+    bbbbbContent
+</div> 
+
+<div>
+    cccccContent
+</div> 
+
+</div>
+
+
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script>
+
+    //this --当前的方法属于谁，this就是谁
+
+    window.onload = function(){
+
+
+        // page.init();   //这种是面向过程的tab实现
+
+        new Tab("div1");
+    }
+
+    //1.面向对象的方式
+
+    function Tab(id){
+
+        var that = this;
+
+        this.oDiv = $(id);
+
+        this.aInput = this.oDiv.getElementsByTagName('input');
+
+        this.aDiv = this.oDiv.getElementsByTagName('div');
+
+        for (var i = 0; i < this.aInput.length; i++) {
+                
+                this.aInput[i].index=i;
+
+                this.aInput[i].onclick = function(){
+
+                    //this 需要传出去
+                    that.fnClick(this);
+
+                };
+
+        };
+
+
+    }
+
+    Tab.prototype = {
+
+
+        constructor:Tab,
+
+        fnClick:function(oBtn){
+
+            //this为Tab对象
+            console.log(this);
+
+            for (var i = 0; i < this.aInput.length; i++) {
+
+                this.aInput[i].className = "";
+
+                this.aDiv[i].style.display = "none";
+
+            };
+
+             oBtn.className = "active";
+
+             this.aDiv[oBtn.index].style.display="block";
+
+        }
+
+
+
+    }
+
+
+    // 2.这种是面向过程的tab实现
+    var page = {
+
+
+        init:function(){
+
+            this.tab();
+
+        },
+
+        tab:function(){
+
+            var oDiv = $("div1");
+
+            var aInput = oDiv.getElementsByTagName('input');
+
+            var aDiv = oDiv.getElementsByTagName('div');
+
+            for (var i = 0; i < aInput.length; i++) {
+                
+                aInput[i].index=i;
+
+                aInput[i].onclick = function(){
+
+                    for (var i = 0; i < aInput.length; i++) {
+
+                        aInput[i].className = "";
+
+                        aDiv[i].style.display = "none";
+
+                    };
+
+                    this.className = "active";
+
+                    aDiv[this.index].style.display="block";
+
+
+                }
+
+            };
+
+        }
+
+    }
+
+    </script>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>javascript 桌面级应用一</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  .mac_menu{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }  
+  </style>
+</head>
+<body>  
+
+
+<!-- <img width="150" height="150" src="http://g.hiphotos.baidu.com/image/w%3D1920%3Bcrop%3D0%2C0%2C1920%2C1080/sign=04f7a6704890f60304b0984e0b228878/18d8bc3eb13533fa0cfeb96faad3fd1f41345b22.jpg" alt="" id="img1" onerror="console.log('failure');" onload="console.log('success');" id="img1"> -->
+
+<input type="text" >
+<input type="text" >
+<input type="text" >
+<input type="text" >
+<input type="text" >
+
+
+<!-- macbook menu -->
+<div class="mac_menu" id="macMenu">
+  
+  <img src="img/iphone1.png" alt="" width="80">
+  <img src="img/iphone2.png" alt="" width="80">
+  <img src="img/iphone3.png" alt="" width="80">
+  <img src="img/iphone4.png" alt="" width="80">
+  <img src="img/iphone5.png" alt="" width="80">
+
+</div>
+<!-- end macbook menu -->
+
+<script>
+
+window.onload = function(){
+
+  page.init();
+
+}
+
+
+/**!
+ * author Lewis.ye
+ * description 页面基础对象
+**/
+
+ var page = {
+
+     init:function(){
+
+         // this.imgObject();
+
+         this.iphoneMenu();
+
+     },
+
+     iphoneMenu:function(){
+
+
+        document.onmousemove = function(ev){
+
+          var oEvent = ev||event,
+
+              aImg = $tag("img"),
+
+              aTxt = $tag("input"),
+
+              oDiv = $("macMenu"),
+
+              i = 0;
+
+          for (var i = 0; i < aImg.length; i++) {
+
+            var x = aImg[i].offsetLeft+aImg[i].offsetWidth/2;
+
+            var y = aImg[i].offsetTop + oDiv.offsetTop+aImg[i].offsetHeight/2;
+
+            var a = x - oEvent.clientX;
+
+            var b = y - oEvent.clientY;
+
+            // var dis = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));   //sqrt 开根号   pow a 的2次
+
+            var dis = Math.sqrt(a*a+b*b);
+
+            // console.log(dis);
+
+             // aTxt[i].value = parseInt(dis);    //offsetLeft到第一层有定位的，所以这里的img   offsetTop为0   ,如何把dis换算成比例
+
+             var scale = 1 - dis/300;
+
+             if(scale<0.5){
+                  scale=0.5;
+             }
+
+             aImg[i].width = scale*160;
+
+             aTxt[i].value = scale.toFixed(2);
+
+          };
+
+    }
+
+
+     },
+
+     //image 对象
+
+     imgObject:function(){
+
+        var oImg = new Image(),
+
+            sImgUrl = "http://365jia.cn/uploads/news/images/SDC14731.jpg";
+
+        oImg.onload = function(){
+
+          console.log("图片预加载成功");
+
+        }
+
+        oImg.onerror = function(){
+
+          console.log("图片预加载失败");
+
+        }
+
+
+        oImg.src = sImgUrl;
+
+        //鼠标滑过图片
+        var src1 = "";
+
+        $("img1").onmouseover = function(){
+
+          src1 = this.src;
+
+          this.src = sImgUrl;
+
+        }
+
+        $("img1").onmouseout = function(){
+
+            this.src=src1;
+
+        }
+
+
+     }
+
+ }
+
+  
+
+//id获取
+
+function $(node){
+    node=typeof node=="string"?document.getElementById(node):node;
+    return node;
+}
+
+function $tag(node){
+    node=typeof node=="string"?document.getElementsByTagName(node):node;
+    return node;
+}
+  
+  </script>
+</body>
+</html>

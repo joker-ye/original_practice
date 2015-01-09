@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>滚动条</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    #div1{
+
+       width: 200px;
+
+       overflow-x: auto;
+
+       border: 1px solid #ddd;
+
+       height: 150px;
+
+       background: #000;
+
+    }
+    .go_ul{
+      width: 20000px;
+    }
+    .go_ul li{
+
+      float: left;
+
+      width: 400px;
+    
+      height: 100px;
+  
+      margin-right: 10px;
+
+      background: #f60;
+
+    }
+    </style>
+</head>
+<body id="body">
+  
+
+<div id="div1">
+  <ul class="go_ul fixed">
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+  </ul>
+</div>
+
+
+<input type="button" id="showLeftInfo" value="show">
+
+<input type="text" id="txt1">
+
+</body>
+
+    <script src="js/jquery/jquery-1.10.2.min.js"></script>
+    
+    <script>
+
+    $(function(){
+
+
+      
+
+      $("#showLeftInfo").on('click',function(){
+
+          var  nScrollLeft = $("#div1")[0].scrollLeft;
+
+          $("#div1").animate({
+            scrollLeft: 19800},
+            3000, function() {
+            /* stuff to do after animation is complete */
+          });
+
+          $("#txt1").val(nScrollLeft);
+
+
+      });
+
+
+
+    });
+
+
+    
+
+
+  
+</script>
+
+
+</html>
+

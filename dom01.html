@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>dom01</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <style type="text/css">
+
+  </style>
+</head>
+<body id="body">
+
+  
+  <div class="wrapper">
+
+    <ul id="ull">
+      <li>发送到发送到<a class="go" href="javascript:;">隐藏</a></li>
+      <li>凤飞飞</li>
+      <li id="li1"></li>
+      <li>fsdfsdfsd</li>
+    </ul>
+
+    <input type="text" id="text" >
+    <input type="button" value="ctrl" id="oper">
+
+  </div>
+
+  <script src="js/base.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+
+  window.onload = function(){  
+
+
+    //上一个兄弟节点，兼容性写法
+    var oLi = $('li1');
+
+    if(oLi.previousElementSibling){
+
+      oLi.previousElementSibling.style.background = "red";  
+
+      console.log(oLi.previousElementSibling.innerHTML);
+
+    }else{
+
+      oLi.previousSibling.style.background = "red";  
+
+    }
+
+
+    // textChildNodes();
+
+    // textParentNode();
+
+    // textFirstChild();
+
+    operOpt();
+
+  }
+
+  //operation property
+
+  function operOpt(){
+
+    var oOper = $("oper");
+
+    var oText = $("text");
+
+    oOper.onclick = function(){
+
+      // oText.value = "gogo";
+
+      oText["value"] = "111";
+
+      // oText.setAttribute("value","goggo");
+
+
+    }
+
+  }
+
+  //text firstChild   , the others is the same to firstChild
+
+  function textFirstChild(){
+
+    //ie6-8 firstChild no question
+    var oUl = $("ull");
+
+    if(oUl.firstElementChild){
+
+      oUl.firstElementChild.style.background = "red";  
+
+    }else{
+
+      oUl.firstChild.style.background = "red";  
+
+    }
+
+    
+
+    //高版本浏览器
+    // oUl.firstElementChild.style.background = "red";  
+
+
+  }
+
+
+  //text parentNode
+  function textParentNode(){
+
+    var aA = $tag("a");
+
+     for (var i=0, j= aA.length; i <j ; i++) {
+
+        aA[i].onclick = function(){
+
+          this.parentNode.style.display = "none";
+
+        }
+
+    }
+
+  }
+
+  //测试子节点
+  function textChildNodes(){
+
+    //ie6-8 没问题
+    var oUl = $("ull");
+
+    // //处理nodeType 形式
+    // for (var i=0, j= oUl.childNodes.length; i <j ; i++) {
+
+    //   if(oUl.childNodes[i].nodeType==1){
+
+    //     oUl.childNodes[i].style.background="red";
+
+    //   }
+      
+    // }
+
+
+    //children 形式，无兼容性问题
+    for (var i=0, j= oUl.children.length; i <j ; i++) {
+
+        oUl.children[i].style.background="red";
+
+    }
+
+  }
+
+  
+  
+  </script>
+</body>
+</html>

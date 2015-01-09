@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>浮动导航</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    #body{height: 5000px;}
+    #div1{width: 100px;height: 150px;background: red;position: absolute;right: 0 ;bottom: 0;}
+    /*#div2{width: 1px;height: 200px;position: absolute;left: 300px;top: 0;background: #000;}*/
+    </style>
+</head>
+<body id="body">
+  
+
+<div id="div1">
+  
+</div>
+
+<div id="div2"></div>
+<p></p>
+<button>Go</button>
+
+
+</body>
+
+    <script src="js/jquery/jquery-1.10.2.min.js"></script>
+    
+    <script>
+
+    $(function(){
+
+      var response = ajaxSend("data/json1.json",{});
+
+      response.done(function(data){
+
+        //console.log(data);
+
+      }).fail(function(error){
+
+        //console.log(error);
+
+      });
+
+    });
+
+
+    function ajaxSend(url, data, option) {
+
+      var that = this,
+
+          dtd = $.Deferred();
+
+          _option = {
+
+            url: url,
+
+            data: data
+
+          };  
+
+      option = option || {};
+          
+      option = $.extend({
+
+        type: 'post',
+
+        dataType: 'json'
+
+      }, option, _option);
+
+
+      $.ajax(option).fail(function (jqXHR, testStatus, errorThrown) {
+
+        // console.log(jqXHR);        //object
+        // console.log(testStatus);   //error
+        // console.log(errorThrown);  //Not found
+
+        // some error occur
+        dtd.reject({}, '网络错误');
+
+      }).done(function (data, textStatus, jqXHR) {
+
+        // console.log(data);         //object
+        // console.log(textStatus);   //success
+        // console.log(jqXHR);        //Not found
+
+        data = $.extend({code: -1, err: {}, info: ''}, data);
+
+        if ("success" == textStatus && 1 == data.id) {
+
+          // success
+          dtd.resolve(data);
+
+          // console.log(dtd.resolveWith(data));
+
+          // deferred.resolveWith（context，args）
+
+        } else {
+
+          // must be an error
+          dtd.reject(data,data.err,data.text);
+
+        }
+
+      });
+
+      return dtd.promise();
+
+    }
+
+
+
+    //then 有两个func 参数，第一个是resoved  另一个是reject
+
+
+    </script>
+
+    <script>
+
+// 3 functions to call when the Deferred object is resolved
+
+function fn1() {
+
+  $( "p" ).append( " 1 " );
+
+}
+
+function fn2() {
+
+  $( "p" ).append( " 2 " );
+
+}
+
+function fn3( n ) {
+
+  $( "p" ).append( n + " 3 " + n );
+
+}
+
+ 
+
+
+// Create a deferred object
+
+var dfd = $.Deferred();
+
+ 
+
+// Add handlers to be called when dfd is resolved
+
+dfd
+
+// .done() can take any number of functions or arrays of functions
+
+  .done( [ fn1, fn2 ], fn3, [ fn2, fn1 ] )
+
+// We can chain done methods, too
+
+  .done(function( n ) {
+
+    $( "p" ).append( n + " we're done." );
+
+  });
+
+ 
+
+// Resolve the Deferred object when the button is clicked
+
+$( "button" ).on( "click", function() {
+
+  dfd.resolve( "and" );
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+  
+function asyncEvent() {
+
+  var dfd = new jQuery.Deferred();
+
+ 
+
+  // Resolve after a random interval
+
+  setTimeout(function() {
+
+    dfd.resolve( "hurray" );
+
+  }, Math.floor( 400 + Math.random() * 2000 ) );
+
+ 
+
+  // Reject after a random interval
+
+  setTimeout(function() {
+
+    dfd.reject( "sorry" );
+
+  }, Math.floor( 400 + Math.random() * 2000 ) );
+
+ 
+
+  // Show a "working..." message every half-second
+
+  setTimeout(function working() {
+
+    if ( dfd.state() === "pending" ) {
+
+      dfd.notify( "working... " );
+
+      setTimeout( working, 500 );
+
+    }
+
+  }, 1 );
+
+ 
+
+  // Return the Promise so caller can't change the Deferred
+
+  return dfd.promise();
+
+}
+
+ 
+
+// Attach a done, fail, and progress handler for the asyncEvent
+
+$.when( asyncEvent() ).then(
+
+  function( status ) {
+
+    alert( status + ", things are going well" );
+
+  },
+
+  function( status ) {
+
+    alert( status + ", you fail this time" );
+
+  },
+
+  function( status ) {
+
+    $( "body" ).append( status );
+
+  }
+
+);
+
+
+  
+</script>
+
+
+</html>
+

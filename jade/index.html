@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>jade</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+  
+  </style>
+</head>
+<body>
+
+
+
+
+
+  <script src="../js/sea.js"></script>
+
+
+  <script src="../js/sea-modules/jade/jade.js"></script>
+
+  <script>
+
+
+  seajs.config({
+        base:"../js/sea-modules",
+        alias: {
+            "$": "jquery/jquery/1.7.2/jquery",
+            "$-debug": "jquery/jquery/1.7.2/jquery-debug",
+            "jquery": "jquery/jquery/1.7.2/jquery",
+            "jquery-debug": "jquery/jquery/1.7.2/jquery-debug",
+            "jade":"jade/jade.js"
+        },
+        'map': [
+              // [ /^(.*\.(?:css|js))(.*)$/i, '$1?20140401' ]
+             [ /^(.*\/_output\/.*\.(?:css|js))(?:.*)$/i, '$1?20110802' ]
+         ],
+         debug: 1
+  });
+
+  seajs.use("init",function(init){
+
+    
+
+
+
+
+
+  });
+
+
+
+  
+  </script>
+</body>
+</html>

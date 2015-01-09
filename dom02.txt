@@ -1,0 +1,10 @@
+1. parentNode.appendChild(childNode)
+2.insertBefore   parentNode.insertBefore(childNode,在谁之前)
+3.no insertAfter  这个可以自己拓展
+4.removeChild    parentNode.removeChild(childNode)
+
+
+important 文档碎片
+1.作用，可以提高DOM性能
+2.文档碎片的原理
+3.document.createDocumentFragment()

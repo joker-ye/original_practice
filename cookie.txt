@@ -1,0 +1,9 @@
+cookie
+1.页面用来保存信息
+  自动登录，记住用户名
+2.cookie的特性
+ 同一个网站公用一套cookie
+ 数量大小有限
+ 过期时间
+3.js中使用cookie
+ document.cookie

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>缓冲运动</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    #div1{width: 200px;height: 200px;background: red;position: absolute;left: 600px;top: 50px;}
+    #div2{width: 1px;height: 200px;position: absolute;left: 300px;top: 0;background: #000;}
+    </style>
+</head>
+<body id="body">
+   
+
+<input type="button" value="开始运动" onclick="startMove(300)">
+
+<div id="div1">
+  
+</div>
+
+<div id="div2"></div>
+
+
+</body>
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+       //移动
+       function startMove(iTarget){
+
+          var oDiv = $("div1");
+
+
+          timer = setInterval(function(){
+
+            var speed = (iTarget- oDiv.offsetLeft)/10;
+
+            speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+
+            oDiv.style.left = oDiv.offsetLeft+speed+"px";
+
+            document.title = oDiv.offsetLeft+','+speed;
+            
+
+          },30);
+
+       }
+   
+
+    </script>
+</html>

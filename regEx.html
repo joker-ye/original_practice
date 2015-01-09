@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>正则表达式</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">
+    textarea{
+      width: 200px;
+      height: 200px;
+      padding: 10px;
+    }
+    </style>
+</head>
+<body id="body" style="padding:10px;">
+
+<textarea id="txt1"></textarea>
+<input type="button" id="btn" value="提交">
+<textarea id="txt2"></textarea>
+
+
+</body>
+    <script src="js/base.js"></script>
+    <script>
+     
+     window.onload = function(){
+                 
+        page.init();
+
+
+
+     }
+
+
+     var page = {
+
+         init:function(){
+
+              this.strExample();
+
+              this.filterNum();
+
+              this.regFilterNum();
+
+              this.regExp01();
+
+              this.regExp02();
+
+              this.filterWord();
+
+              this.checkEmail();
+
+         },
+
+         checkEmail:function(){
+
+            //email的规则  英文、数字、下划线  @ 英文、数字  .   一串英文
+
+             var reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;  //邮箱是不需要检验大小写的   ^$ 行首和行尾
+
+             var email = 'yl_perfect_net@live.cn';
+
+             console.log(email.match(reg));  // 错误会返回null  正确会返回一个数组
+
+             console.log(reg.test(email));  //true /false   test 只要这个字符串的一部分符合要求，就能返回true
+    
+         },
+
+         //关键词替换
+         filterWord:function(){
+
+             var oTxt1 = $("txt1");
+
+             var oTxt2 = $("txt2");
+
+             var re = /叶岭|wendy|骂人/g;
+
+              $("btn").onclick = function(){
+
+                oTxt2.value = oTxt1.value.replace(re,'***');
+
+              }
+
+
+              var str = '32342fjsljflsd 2399 003jkjj 00';
+
+              console.log(str.match(/\d+/g));   //array 
+
+         },
+
+
+         strExample:function(){
+
+              var str = "abcdef";
+
+               console.log(str.search("h"));  //返回位置   没有返回-1
+
+               console.log(str.substring(2,5));  //返回cde，不包括结束位置
+
+               console.log(str.substring(1));  //返回bcdef  , 取到最后
+
+               console.log(str.charAt(2));   //renturn c
+
+               var str2 = "12-333-55-uu";
+
+               console.log(str2.split("-"));
+
+         },
+
+
+         filterNum:function(){
+
+              var str = '12  ff 87 or 334 808fjosdjafls-=flsdjflsj80';
+
+              var tmp = '';
+
+              var arr = [];
+
+              for (var i = 0; i < str.length; i++) {
+                
+                if(str.charAt(i)>='0' && str.charAt(i)<='9'){
+
+                     tmp+=str.charAt(i);
+
+                }else{
+
+                  if(tmp){
+
+                    arr.push(tmp);
+
+                    tmp = '';
+
+                  }
+
+                }
+
+              };
+
+              if(tmp){
+
+                    arr.push(tmp);
+
+                    tmp = '';
+
+                }
+
+              // console.log(arr);
+
+
+         },
+
+         regFilterNum:function(){
+
+              var str = '12  ff 87 or 334 808fjosdja455fls-=flsdjflsj80';
+
+              console.log(str.match(/\d+/g));
+
+         },
+
+         regExp01:function(){
+
+            // var re = new RegExp('b');   //var re = /a/;   一样的！但是new 叫js风格   per风格
+
+            var re = /b/i;  //i 为忽略大小写
+ 
+            var str = 'aBcdef';
+
+            console.log(str.search(re));  //1  --索引
+
+            console.log(typeof re); // object
+
+         },
+
+
+         //search   match
+         regExp02:function(){
+
+             var str = 'adsf 23 23 fdsk45555ljflsdjfldslfsjalfjdsajflsdj';
+
+             var re = /\d+/g;   //\d就是数字   g找到全部  i不区分大小写  +个数（若干）
+
+             var str01 = 'abc aaa erw';
+
+             var a = /a/g;
+
+             console.log(str01.replace(a, 0));
+
+             console.log(str.search(re));  //5
+
+             console.log(str.match(re));    //match返回了一个数组
+             
+
+         }
+
+        
+     }
+
+    </script>
+</html>

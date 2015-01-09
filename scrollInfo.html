@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>滚动条信息</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">    
+    #body{height: 3000px;}
+    </style>
+</head>
+<body id="body">
+   
+<span>滚动条相关信息</span>
+
+
+</body>
+    <script src="js/base.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+    window.onload = function(){
+
+      console.log(getScroll());
+
+      document.write("js可视化区域宽度"+document.documentElement.clientWidth+"<br />"+"js可视化区域高度"+document.documentElement.clientHeight);
+      // alert(document.documentElement.clientHeight);
+
+    }
+
+      
+   function getScroll(){ 
+      var t, l, w, h;   
+          
+       if (document.documentElement && document.documentElement.scrollTop) {
+           t = document.documentElement.scrollTop;   
+           l = document.documentElement.scrollLeft;
+           w = document.documentElement.scrollWidth;
+           h = document.documentElement.scrollHeight;   
+       } else if (document.body) {
+
+           t = document.body.scrollTop;  
+           l = document.body.scrollLeft;   
+           w = document.body.scrollWidth;   
+           h = document.body.scrollHeight;   
+
+       }   
+       return { t: t, l: l, w: w, h: h };   
+   }   
+
+
+   
+
+    </script>
+</html>

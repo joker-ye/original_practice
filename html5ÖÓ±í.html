@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>html5 钟表</title>
+</head>
+
+<body onload="int_canvas()">
+	<!-- 注释 -->
+	<div>自定义钟表</div>
+	<br />
+	<br />
+	<!-- 画布 -->
+    <canvas id="sample" width="200" height="200" style="border:2px solid blue"></canvas>
+
+    <script type="text/javascript">
+    	function int_canvas(){
+
+	    	var canvas = document.getElementById("sample");  //创建画布
+    		cxt = canvas.getContext("2d");	 //定义全局变量
+    		cw = parseInt(canvas.width);
+    		ch = parseInt(canvas.height);
+            cxt.translate(cw/2,ch/2);
+    		draw_watch();
+
+    	}
+
+    	function draw_watch(){
+    		cxt.clearRect(-cw/2,-ch/2,cw,ch);	//清除画布内容
+    		var len = Math.min(cw,ch)/2;//计算针的最大长度
+    		var tlen = len*0.85;	//刻度盘半径
+
+    		//绘制刻制盘
+    		for (var i=0;i<12;i++){
+                var tag1 = Math.PI*2*(3-i)/12;  //π=3.14.....
+                var tx = tlen*Math.cos(tag1);   //-1,1之间的值
+                var ty = -tlen*Math.sin(tag1);	// -1,1之间的值
+                cxt.fillText(i,tx,ty);//0点时，tx为0，ty为负值，原因同样是画布以浏览器左上角为原点向右、向下为增
+            }
+
+            //绘制数字12
+            cxt.fillStyle = "#fff";
+            cxt.fillRect(-3,-95,10,10);
+            cxt.closePath();
+            cxt.fillStyle = "#000";
+            cxt.fillText(12,0,-85);
+            cxt.closePath();
+
+            //获取时间
+            var d = new Date();//获取当前日期
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+
+            //每天24小时制
+            if(h>12){h = h-12}
+
+            //绘制时针
+        	var angle1=Math.PI*2*(3-(h+m/60))/12;	//12个刻度
+            var length1=len*0.5;
+            drawHand(angle1,length1,4,"#007cd2");
+
+            //分针
+            var angle2=Math.PI*2*(15-(m+s/60))/60;  //分钟为60个刻度，同理，秒针也是
+            var length2=len*0.7;
+            drawHand(angle2,length2,3,"#ffa200");
+
+            //秒针
+	        var angle3=Math.PI*2*(15-s)/60;
+	        var length3=len*0.8;
+	        drawHand(angle3,length3,1,"#f00");
+
+    	}
+
+    	//绘制指针函数
+        function drawHand(angle,length,width,color){
+	        //计算针端位置
+	        var x = length*Math.cos(angle);
+	        var y = -length*Math.sin(angle);
+	        cxt.strokeStyle = color;
+	        cxt.lineWidth = width;
+	        cxt.lineCap = "round";//设置针尖为圆形
+	        cxt.beginPath();
+	        cxt.moveTo(0,0);
+	        cxt.lineTo(x,y);
+	        cxt.stroke();
+        }
+        setInterval(function(){draw_watch()},1000);
+    </script>
+</body>
+</html>

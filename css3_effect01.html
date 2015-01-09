@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .gray {
+        width: 100%;
+        background-color: #000;
+        position: absolute;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        display: none;
+        zoom: 1;
+    }
+    .choose {
+        height: 40px;
+        width: 80px;
+        background-color: #000;
+        position: absolute;
+        top: 300px;
+        left: 30%;
+        z-index: 100001;
+        display: none;
+        overflow: hidden;
+    }
+    #choose1,
+    #choose2 {
+        display: block;
+        height: 30px;
+        width: 100px;
+        cursor: pointer;
+        margin: 0 auto
+    }
+    .circle1 {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        z-index: 100002;
+        left: 300px;
+        top: 50px;
+        border: 1px solid #36FEFF;
+        border-color: #36feff transparent #36feff transparent;
+        animation: ring 2s linear 0s Infinite;
+        -webkit-animation: ring 2s linear 0s Infinite;
+    }
+    @keyframes ring {
+        50% {
+            transform: rotate(90deg)
+        }
+        100% {
+            transform: rotate(180deg)
+        }
+    }
+    @-webkit-keyframes ring {
+        50% {
+            -webkit-transform: rotate(90deg)
+        }
+        100% {
+            -webkit-transform: rotate(180deg)
+        }
+    }
+    .circle2 {
+        height: 100px;
+        width: 100px;
+        left: 350px;
+        top: 100px;
+        border: 1px solid #36feff;
+        border-color: transparent #36feff transparent #36feff;
+        position: absolute;
+        border-radius: 50%;
+        animation: ringg 1s linear 0s Infinite;
+        -webkit-animation: ringg 1s linear 0s Infinite;
+    }
+    @keyframes ringg {
+        50% {
+            transform: rotate(90deg)
+        }
+        100% {
+            transform: rotate(180deg)
+        }
+    }
+    @-webkit-keyframes ringg {
+        50% {
+            -webkit-transform: rotate(90deg)
+        }
+        100% {
+            -webkit-transform: rotate(180deg)
+        }
+    }
+    .choose-left,
+    .choose-right {
+        height: 1px;
+        width: 200px;
+        background-color: #36feff;
+        position: absolute;
+        top: 200px;
+        left: 200px;
+        display: none;
+    }
+    .choose-right {
+        left: 400px;
+    }
+    .c-heizi {
+        width: 80px;
+        height: 30px;
+        position: absolute;
+        bottom: 30px;
+        left: 200px;
+        border: 1px solid #f90;
+        font-size: 16px;
+        font-family: "微软雅黑";
+        line-height: 30px;
+        text-align: center;
+        color: #fff
+    }
+    .c-kaiguan {
+        width: 80px;
+        height: 30px;
+        position: absolute;
+        bottom: 30px;
+        border: 1px solid #f90;
+        right: 200px;
+        font-size: 16px;
+        font-family: "微软雅黑";
+        line-height: 30px;
+        text-align: center;
+        color: #fff
+    }
+    </style>
+
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+
+
+        var hei = $(document).height();
+
+
+
+        $("#product").click(function() {
+            $(".gray").css('height', hei);
+            $(".gray").fadeTo('1000', 0.8);
+            $(".choose").show().animate({
+                height: "400px",
+                width: "800px"
+            }, 500).fadeTo('2000', 0.8)
+
+            return false
+        });
+        $(".c-heizi").click(function() {
+
+            $(".choose").animate({
+                height: "0",
+                top: "450px"
+            }, 500);
+            $(".circle1").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".circle2").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".choose-left").show().animate({
+                width: "0",
+                left: "0",
+                top: "0"
+            }, 500)
+            $(".choose-right").show().animate({
+                width: "0",
+                left: "800px",
+                top: "0"
+            }, 500)
+            setTimeout(
+                function() {
+                    document.location.href = "http://www.baidu.com"
+                }, 500);
+        })
+        $(".c-kaiguan").click(function() {
+
+            $(".choose").animate({
+                height: "0",
+                top: "450px"
+            }, 500);
+            $(".circle1").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".circle2").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".choose-left").show().animate({
+                width: "0",
+                left: "0",
+                top: "0"
+            }, 500)
+            $(".choose-right").show().animate({
+                width: "0",
+                left: "800px",
+                top: "0"
+            }, 500)
+            setTimeout(
+                function() {
+                    document.location.href = "http://www.baidu.com"
+                }, 500);
+        })
+        $(".c-heizi").click(function() {
+
+            $(".choose").animate({
+                height: "0",
+                top: "450px"
+            }, 500);
+            $(".circle1").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".circle2").animate({
+                height: "0",
+                width: "0",
+                top: "150px",
+                left: "400px"
+            }, 100);
+            $(".choose-left").show().animate({
+                width: "0",
+                left: "0",
+                top: "0"
+            }, 500)
+            $(".choose-right").show().animate({
+                width: "0",
+                left: "800px",
+                top: "0"
+            }, 500)
+            setTimeout(
+                function() {
+                    document.location.href = "http://www.baidu.com"
+                }, 500);
+        })
+
+    });
+    </script>
+
+
+</head>
+
+<body>
+    <input type="submit" id="product" value="点我">
+    <div class="gray">
+    </div>
+    <div class="choose">
+
+
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="choose-left"></div>
+        <div class="choose-right"></div>
+        <div class="c-heizi">盒子</div>
+        <div class="c-kaiguan">开关</div>
+
+    </div>
+</body>
+
+</html>

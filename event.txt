@@ -1,0 +1,57 @@
+1.event 是什么
+用来获取鼠标位置，键盘按键
+获取鼠标位置 clienX
+document的本质:document.childNodes[0].tagName
+
+2.获取event对象 兼容写法
+var oEvent = ev||event;
+
+3.事件流
+取消冒泡 oEvent.cancelBubble = true
+例子：仿select控件
+dom事件流
+
+
+
+中级
+1.默认行为 
+ 什么是默认行为--浏览器自带的
+
+2.阻止默认行为
+jq event.preventDefault()
+
+js 
+
+
+屏蔽右键菜单
+弹出自定义菜单
+只能输入数字的输入框
+
+
+context 环境菜单  右键菜单
+
+
+
+高级应用1：
+1.事件绑定
+IE：attachEvent(事件名称,函数)   detachEvent(事件名称,函数)
+DOM: addEventListener(事件名称,函数,捕获)   removeEventListener(事件名称,函数,捕获)
+何时使用事件绑定
+绑定事件和this
+绑定匿名函数，会无法删除
+
+
+
+setCaptrue()  releaseCapture()  IE下支持的事件捕获
+
+
+高级应用2：
+1.拖拽的虚线框
+2.自定义滚动条
+  只有横向滚动条
+  限制范围
+  计算比例
+ 控制其他对象
+ a.控制物体大小
+ b.控制物体透明度
+ c.控制文字滚动

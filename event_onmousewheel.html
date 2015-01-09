@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>事件—滚轮事件</title>
+  <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+  #div1{
+    height:2000px;width: 100px;background: #f60;
+  }
+
+  </style>
+</head>
+<body id="body">
+
+<div id="div1">
+  
+</div>
+
+<label for="wheelDelta">  滚动值:</label>(IE/Opera)<input type="text" id="wheelDelta" /></p>
+ <p><label for="detail"> 滚动值:(Firefox)</label><input type="text" id="detail" /></p>
+ <script type="text/javascript">
+ var oTxt=document.getElementById("txt");
+/***********************
+* 函数：判断滚轮滚动方向
+* 作者：walkingp
+* 参数：event
+* 返回：滚轮方向 1：向上 -1：向下
+*************************/
+var scrollFunc=function(e){
+    var direct=0;
+    e=e || window.event;
+   
+    var t1=document.getElementById("wheelDelta");
+
+    var t2=document.getElementById("detail");
+
+    if(e.wheelDelta){//IE/Opera/Chrome
+        t1.value=e.wheelDelta;
+    }else if(e.detail){//Firefox
+        t2.value=e.detail;
+    }
+    ScrollText(direct);
+}
+/*注册事件*/
+if(document.addEventListener){
+    document.addEventListener('DOMMouseScroll',scrollFunc,false);
+}//W3C
+window.onmousewheel=document.onmousewheel=scrollFunc;//IE/Opera/Chrome/Safari
+</script>
+
+
+  <script src="js/base.js"></script>
+
+  <script>
+
+
+  window.onload = function(){
+
+
+    page.init();
+
+
+  }
+
+
+
+  var page = {
+
+
+    init:function(){
+
+      this.wheel();
+
+    },
+
+    wheel:function(){
+
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+      OE.addEvent(window,"mousewheel",function(){
+
+        
+
+
+
+      });
+
+
+    }
+
+
+
+
+  }
+  
+  </script>
+</body>
+</html>

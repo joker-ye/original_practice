@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>延迟加载</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">    
+
+    </style>
+</head>
+<body id="body">
+   
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+  <img src="../img/wait.jpg" _src="../img/main.jpg" class="wait_load" alt="">
+
+
+
+</body>
+    <script src="../js/base.js"></script>
+    <script>
+
+    window.onload = function(){
+
+        page.init();
+
+    }
+
+
+    //图片的延迟加载原理
+    //1.src上来不给具体的主图路径   loading.gif    _src='main.jpg'  src='wait_load.jpg'
+    //2.滚动到可视化区域的时候，会进行替换
+    //3.
+
+    var page = {
+
+        init:function(){
+
+            var aWaitload = OD.getElementsByClassName('wait_load');
+
+            var sSrc = aWaitload[0].getAttribute("_src");
+
+            //赋值
+            aWaitload[0].setAttribute("src",sSrc);
+
+            //找出距离顶部的距离
+
+        }
+
+    }
+    
+
+
+    </script>
+</html>

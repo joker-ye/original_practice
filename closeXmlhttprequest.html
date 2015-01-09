@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>首页</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css"></head>
+<body id="body">
+  <script src="js/base.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    //闭包1
+    // var scope = "global";
+    // function checkScope(){
+    //   var scope = "local scope";
+    //   function f(){return scope;}
+    //   return f;
+    // }
+
+    // console.log("闭包1:"+checkScope()()); //== f() return local scope
+    //闭包2
+    var scope = "global";
+    function checkScope2(){
+      var scope = "local scope";
+      function f(){return scope;}
+      return f();
+    }
+    console.log("闭包2:"+checkScope2()); //== f() return local scope
+
+    //call() apply()
+    function add(x,y){
+      return x+y;
+    }
+
+    function min(x,y){
+      return x-y;
+    }
+
+    var a = add.call(this,10,3);
+    var b = add.apply(this,[10,3]);
+
+    console.log("call:"+a);//13    用add代替min
+    console.log("call:"+b);//13    用add代替min
+
+    function trace(o,m){
+      var ori = o[m];
+      o[m] = function(){
+        var result = ori.apply(this,arguments);
+        return result;
+      }
+    }
+    var obj = {
+      go:function(){
+        console.log("trace:go");
+      }
+    };
+    trace(obj,"go");
+
+    obj.go();
+
+
+    //arguments
+    function check(args){
+      var actual = args.length;
+      var expected = args.callee.length;
+      if(actual!==expected){
+        throw Error("error");
+      }
+    }
+
+    function f(x,y,z){
+      check(arguments);
+      return x+y+z;
+    }
+
+    console.log(f(1,10,20));
+
+    //闭包
+    // function constfuncs(){
+    //   var funcs = [];
+    //   for(var i=0;i<10;i++){
+    //     funcs[i] = function(){return i;};
+    //   }
+    //   return funcs;
+    // }
+
+    // var funcs = constfuncs();
+    // console.log(funcs[3]());//总是10
+
+    function constfunc(v){
+      return function(){return v;};
+    }
+
+    var funcs = [];
+    for(var i = 0;i<10;i++){
+      funcs[i] = constfunc(i);
+    }
+
+    console.log(funcs[5]());//5
+
+
+
+
+//xmlhttp
+
+var xmlhttp;
+function loadXMLDoc(url){
+        xmlhttp=null;
+        if(window.XMLHttpRequest){    //code for all new browsers
+            xmlhttp=new XMLHttpRequest();
+        }else if(window.ActiveXObject){    //code for IE5 and IE6
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if(xmlhttp!=null){
+            xmlhttp.onreadystatechange=state_Change;
+            xmlhttp.open("GET",url,true);  //建立对服务器的调用,请求还没有被发送
+            xmlhttp.send(null);  //HTTP 请求已发送到 Web 服务器。未接收到响应
+        }else{
+            alert("Your browser does not support XMLHTTP.");
+        }
+}
+
+function state_Change(){
+  console.log(1111);
+    if(xmlhttp.readyState==4){    //4 = "loaded"
+        if(xmlhttp.status==200){    //200 = OK
+            console.log(xmlhttp.responseText);// string
+        }else{
+            alert("Problem retrieving XML data");
+        }
+    }
+}
+
+loadXMLDoc("data/json1.json");
+
+
+
+
+
+
+    </script>
+
+  <p>
+    <img id="img" src="img/detail.jpg" style="width:200px;height:100px;" />
+
+    <a href="javascript:;" id="a"></a>
+
+    <img id="newImg"/>
+  </p>
+
+<script>
+   
+  window.onload = function(){
+
+      var img=new Image();
+
+      img.src=document.getElementById("img").src;
+
+      var width=img.width,height=img.height;
+
+      console.log(width+" "+height);
+
+      document.getElementById("newImg").src=img.src;
+  }
+
+
+  //merge
+// Y.merge = function () {
+//   var args = arguments,
+//   i = 0,
+//   len = args.length,
+//   result = {};
+//   for (; i < len; ++i) {
+//      Y.mix(result, args[i], true);
+//   }
+//   return result;
+// };
+
+
+/*
+ * @break
+ */
+
+// var values = [ 1, 2, 3, 4, 5, 6, 7 ],
+// i, len;
+// for (i=0, len=values.length; i < len; i++) {
+// if (i == 2) {
+// break; // no more iterations
+// }
+// console.log("break:"+values[i]);
+// }
+
+
+/*
+ * @continue
+ */
+
+// var values = [ 1, 2, 3, 4, 5, 6, 7 ],
+// i, len;
+// for (i=0, len=values.length; i < len; i++) {
+// if (i == 2) {
+// continue; // skip just this iteration
+// }
+// console.log("continue:"+values[i]);
+// }
+
+</script>
+</body>
+</html>

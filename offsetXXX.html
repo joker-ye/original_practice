@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>scroll_seamless</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    .scroll_box{
+        position: relative;
+        width: 320px;
+        overflow: hidden;
+        border:1px solid #f60;
+        height: 100px;
+        margin-left: 50px;
+        margin-top: 50px;
+    }
+    .scroll_box ul{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .scroll_box ul li{
+        float: left;
+        margin-right: 10px;
+    }
+    .scroll_box ul li img{
+        width: 100px;
+        height: 100px;
+    }
+
+    #div1{
+
+        width: 100px;
+        height: 100px;
+        background: #f60;
+        margin: 100px;
+        margin: 150px;
+    }
+
+    #div2{
+        
+        width: 300px;
+        height: 300px;
+        background: green;
+        margin: 100px;
+        display: none;
+        color: #fff;
+
+    }
+    </style>
+</head>
+
+<body id="body">
+
+    <div class="wrapper">
+
+      
+        <div class="scroll_box">
+
+                       
+            <ul class="fixed" id="ull">
+                <li>
+                    <img src="img/detail.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/detail.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/detail.jpg" alt="">
+                </li>               
+                
+            </ul>
+
+           
+        </div>
+
+        <a href="javascript:;" id="goLeft">向左走</a>
+
+        <a href="javascript:;" id="goRight">向右走</a>
+
+
+        <input type="button" value="start" id="start">
+        <input type="button" value="end" id="end">
+
+
+        <div id="div1"></div>
+        <div id="div2"></div>
+
+
+    </div>
+
+    <script src="js/base.js"></script>
+    <script>
+    window.onload = function() {
+
+        page.init();
+
+    }
+
+
+    var page = {
+
+        init:function(){
+
+            this.showBox();
+
+            this.showPos();
+
+            this.scrollSeam();
+
+        },
+
+        scrollSeam:function(){
+
+            //offsetLeft / offsetTop
+            //offsetWidth / offsetHeight
+
+            var oUl =  $("ull");
+
+            var aLi = oUl.getElementsByTagName("li");
+
+            var timer = null;
+
+            var speed = -2;
+
+            oUl.innerHTML += oUl.innerHTML;
+
+            oUl.style.width = (aLi[0].offsetWidth+10)*aLi.length+"px";  //10 margin为边距
+
+            timer = setInterval(scroll,30);
+
+            oUl.onmouseover = function(){
+
+                clearInterval(timer);
+
+            }
+
+            oUl.onmouseout = function(){
+
+               timer = setInterval(scroll,30);
+
+            }
+        
+            //左右点击按钮
+            $("goLeft").onclick=function(){
+
+                speed = -2;
+
+            }
+
+            $("goRight").onclick=function(){
+
+                speed = 2;
+                
+            }
+
+             function scroll(){
+                
+
+                if(oUl.offsetLeft<-oUl.offsetWidth/2){
+
+                    oUl.style.left = "0";
+
+                }
+
+                if(oUl.offsetLeft>0){
+
+                    oUl.style.left =-oUl.offsetWidth/2+"px";
+
+                }
+
+                oUl.style.left = oUl.offsetLeft+speed+"px";
+
+            }
+
+        },
+
+        showBox:function(){
+
+            //延迟提示框
+
+            var oDiv1 = $("div1");
+
+            var oDiv2 = $("div2");
+
+            var timer = null;
+
+            oDiv2.onmouseover = oDiv1.onmouseover = function(){
+
+                clearTimeout(timer);
+
+                oDiv2.style.display = "block";
+
+            };
+
+            oDiv2.onmouseout = oDiv1.onmouseout = function(){
+
+                timer = setTimeout(function(){
+
+                    oDiv2.style.display = "none";
+
+                },500);
+                
+                
+            }
+
+
+        },
+
+        showPos:function(){
+
+            var oDiv1 = $("div1");
+
+            var oDiv2 = $("div2");
+
+           oDiv2.innerHTML = oDiv1.offsetLeft+"   offsetTop:   "+oDiv1.offsetTop;
+
+        }
+
+    }
+
+
+
+    </script>
+</body>
+
+</html>

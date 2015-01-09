@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>多物体高度</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    div{
+      width: 200px;
+      height: 200px;
+      margin: 20px;
+      float: left;
+      background: #f60;
+      color: #fff;
+      border:10px solid #000;
+
+      font-size: 12px;
+
+      
+    }
+
+    .c5{
+      filter:alpha(opacity:30);
+      opacity: 0.3;
+    }
+    </style>
+</head>
+<body id="body">
+
+<div class="c1" id="div1">变高</div>
+<div class="c2" id="div2">变宽</div>
+
+<div class="c3" id="div3">发射点发斯蒂芬斯蒂芬森的</div>
+
+<div class="c4" id="div4">变borderWidth</div>
+
+<div class="c5" id="div5">变透明度</div>
+
+<div id="div6">多种动画集成</div>
+
+
+<input type="text" id="text1">
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script src="js/move.js"></script>
+    <script>
+
+    window.onload = function(){
+
+      // setInterval(function(){
+
+      //    $("div3").style.width =  $("div3").offsetWidth-1+"px";
+
+      // },30);
+
+     
+      // console.log($("div3").offsetWidth);
+
+
+      var oDiv1 = $("div1");
+
+      var oDiv2 = $("div2");
+
+      var oDiv3 = $("div3");
+
+      var oDiv4 = $("div4");
+
+      var oDiv5 = $("div5");
+
+      var oDiv6 = $("div6");
+
+      oDiv1.onmouseover = function(){
+
+        startMove(this,{"height":400});
+
+      };
+
+      oDiv1.onmouseout = function(){
+
+        startMove(this,{"height":200});
+        
+      }
+
+      oDiv2.onmouseover = function(){
+
+        startMove(this,{"width":400});
+
+      };
+
+      oDiv2.onmouseout = function(){
+
+        startMove(this,{"width":200});
+        
+      }
+
+      oDiv3.onmouseover = function(){
+
+        startMove(this,{"fontSize":50});
+
+      };
+
+      oDiv3.onmouseout = function(){
+
+        startMove(this,{"fontSize":14});
+        
+      }
+
+       oDiv4.onmouseover = function(){
+
+        startMove(this,{"borderWidth":50});
+
+      };
+
+      oDiv4.onmouseout = function(){
+
+        startMove(this,{"borderWidth":10});
+        
+      }
+      
+      oDiv5.onmouseover = function(){
+
+        startMove(this,{"opacity":100});
+
+      };
+
+      oDiv5.onmouseout = function(){
+
+        startMove(this,{"opacity":50});
+        
+      }
+
+      oDiv6.onmouseover = function(){
+
+        var that = this;
+
+        startMove(this,{"width":500,"height":800},function(){
+
+          startMove(that,{"height":500},function(){
+
+            startMove(that,{"opacity":30},function(){
+
+              console.log("完成");
+
+            });
+
+          });
+
+        });
+
+      };
+
+      oDiv6.onmouseout = function(){
+
+        var that = this;
+
+        startMove(this,{"opacity":100},function(){
+
+          startMove(that,{"height":200},function(){
+
+            startMove(that,{"width":200,"height":200},function(){
+
+               console.log("完成");
+              
+            });
+
+          });
+
+        });
+        
+      }
+
+    };
+
+
+    </script>
+</html>

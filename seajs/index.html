@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>seajs首页</title>
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <style type="text/css">    
+    
+    </style>
+</head>
+<body id="body">
+
+
+
+<script src="../js/sea.js"></script>
+
+<script type="text/javascript">
+
+  seajs.config({
+        base:"../js/sea-modules",
+        alias: {
+            "$": "jquery/jquery/1.7.2/jquery",
+            "$-debug": "jquery/jquery/1.7.2/jquery-debug",
+            "jquery": "jquery/jquery/1.7.2/jquery",
+            "jquery-debug": "jquery/jquery/1.7.2/jquery-debug",
+            "json": "gallery/json/1.0.3/json",
+            "underscore": "gallery/underscore/1.5.2/underscore",
+            "backbone": "gallery/backbone/1.1.0/backbone",
+            "backboneLocalStorage": "gallery/backboneLocalStorage"
+        },
+        'map': [
+              // [ /^(.*\.(?:css|js))(.*)$/i, '$1?20140401' ]
+             [ /^(.*\/_output\/.*\.(?:css|js))(?:.*)$/i, '$1?20110802' ]
+         ],
+         debug: 1
+  });
+
+  seajs.use("$",function($){
+
+    console.log($("body").length);
+
+  });
+
+  seajs.use("init",function(a){
+
+    a.showInfo()
+
+    console.log($("body").length);
+
+  });
+
+</script>
+
+
+</body>
+</html>

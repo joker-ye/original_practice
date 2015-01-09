@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>面向对象01</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style type="text/css">
+    
+    </style>
+</head>
+<body id="body">
+
+
+
+
+
+
+</body>
+
+    <script src="js/base.js"></script>
+    <script src="js/move.js"></script>
+    <script>
+
+    //this --当前的方法属于谁，this就是谁
+
+    window.onload = function(){
+
+        var arr=[1,2,3,4,5];
+
+        var arr2 = new Array(10,20,30);
+
+        arr.a = 12;
+
+        // console.log(arr);
+
+        arr.show = function (){
+
+            console.log(this.a);
+
+        }
+
+        // arr.show();
+
+
+        
+
+        // console.log(arr2.sum());
+
+        Array.prototype.sum = function(){
+        // arr.sum = function(){
+
+            var result = 0;
+
+            for (var i = 0; i < this.length; i++) {
+
+                result+=this[i];
+
+            };
+
+            return result;
+
+        }
+
+        var i = arr.sum();
+
+        console.log(i);
+
+        console.log(arr2.sum());
+
+
+    }
+
+    // function show(){
+    //     alert(this);
+    // }
+
+    // window.show = function(){
+    //     alert(this);
+    // }
+
+   //比较常用的方式吧。
+   //把不一样的，写在person里面
+    function Person(name,age,body_height){
+
+        this.name = name;
+
+        this.age = age;
+
+        this.body_height = body_height;
+
+    }
+
+    Person.prototype = {
+
+        constructor:Person,
+
+        showAge:function(){
+
+            console.log("age:"+this.age);
+
+        }
+
+    }
+
+    var zs = new Person("zs",20,175);
+
+    console.log(zs);
+
+    zs.showAge();
+
+   
+
+    </script>
+</html>

@@ -1,0 +1,27 @@
+1.标签
+2.元素
+3.节点
+
+
+1.childNodes ->子节点
+2.nodeType   ->节点类型 {
+
+	1=>元素节点
+	2=>
+	3=>文本节点
+
+}
+
+3.parentNode -> 父节点
+4.offsetParent -> 获取页面上用来定位的父级元素
+
+5.firstChild firstElementChild ->第一个子节点
+6.lastChild lastElementChild -> 最后一个子节点
+7.nextSibling  nextElementSibling -> 下一个兄弟节点
+7.previousSibling  previousElementSibling -> 下一个兄弟节点
+
+8.setAttribute  getAttribute  removeAttribute
+
+
+
+9.this  -->当前发生事件的元素

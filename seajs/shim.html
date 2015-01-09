@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>shim插件使用</title>
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <style type="text/css">    
+    
+    </style>
+</head>
+<body id="body">
+
+
+
+<script src="../js/sea.js"></script>
+
+<script type="text/javascript">
+
+  seajs.config({
+  // 激活 shim 插件
+  plugins: ['shim'],
+
+  base:"../js/",
+
+  // shim 配置项
+  alias: {
+    // jQuery 的 shim 配置
+    'jquery': {
+      src: 'jquery/jquery-1.10.2.min.js',
+      exports: 'jQuery'
+    },
+ 
+    // jquery.easing 插件的 shim 配置
+    'go': {
+      src: 'test.js',
+      deps: ['jquery']
+    }
+  }
+});
+
+  seajs.use("../js/go",function(go){
+
+    console.log(go);
+
+  });
+
+  
+
+</script>
+
+
+</body>
+</html>

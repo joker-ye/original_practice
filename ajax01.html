@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>ajax01</title>
+    <link rel="stylesheet" href="css/one-debug.css" type="text/css">
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="div1">
+
+    </div>
+
+
+    <input type="button" value="按钮" id="btn1">
+
+    <script src="js/base.js"></script>
+
+    <script>
+    window.onload = function() {
+
+
+        page.init();
+
+
+
+
+    }
+
+
+
+    var page = {
+
+
+        init: function() {
+
+            this.useAjax();
+
+        },
+
+        useAjax: function() {
+
+            var oBtn = $("btn1");
+
+            OE.addEvent(oBtn, "click", function() {
+
+                ajax("data/json1.json?t=" + new Date().getTime(), function(str) {
+
+                    console.log(eval(str)[0]);
+
+                    // console.log(eval("("+str+")"));
+
+                });
+
+
+            });
+
+            // OE.addEvent(oBtn,"click",function(){
+
+            //   alert(2);
+
+            // });
+
+
+
+
+        }
+
+
+
+
+    }
+
+
+    //get ->通过网址来传递   有缓存  更适合用来获取数据
+    //post ->不通过网址    无缓存   更适合用来向服务器传递数据
+    //同步  多事在一起  一件一件来
+    //异步  多个事情可以一起做
+
+    //1.创建 ajax对象
+    //2.连接到服务器
+    //3.发送请求
+    //4.接收返回值
+
+
+
+    function ajax(url, fuSucc, fnFail) {
+
+        //1.create ajax object
+
+        if (window.XMLHttpRequest) { //code for all new browsers
+
+            var oAjax = new XMLHttpRequest();
+
+        } else if (window.ActiveXObject) {
+
+            //code for IE5 and IE6      
+            var oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+
+        }
+
+        //2.connect server
+        oAjax.open("GET", url, true);
+
+        //3.send
+        oAjax.send();
+
+        //4.receive
+        oAjax.onreadystatechange = function() {
+
+
+            if (oAjax.readyState == 4) {
+
+                if (oAjax.status == 200) {
+
+                    // alert("success"+oAjax.responseText);
+
+                    fuSucc(oAjax.responseText);
+
+                } else {
+
+                    if (fnFail) {
+
+                        fnFail(oAjax.status);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+    </script>
+</body>
+
+</html>

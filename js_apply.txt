@@ -1,0 +1,28 @@
+1.图片预加载  --lazyload之类的
+
+<img _src="main.jpg" src="small.gif">
+
+onscroll
+onresize
+
+当图片滚动到可视区域内的时候，进行替换
+
+
+window.onload 页面加载好
+img也有onload事件
+
+
+2.苹果导航菜单
+
+原理：距离决定大小
+      两点间距离（勾股定理）
+      距离变成比例
+
+3.google 自定义首页
+
+布局转换、拖拽、占位符、碰撞检测、交换位置      
+
+
+
+
+
